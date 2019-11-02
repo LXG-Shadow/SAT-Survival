@@ -15,5 +15,4 @@ public interface scoreboards {
     public HashMap<Integer, String> getTextList();
     public void setText(int index, String text);
     public void setTitle(String t);
-
 }
