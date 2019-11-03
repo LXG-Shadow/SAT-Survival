@@ -35,6 +35,7 @@ import java.util.*;
 
 public class WitherSword {
     static ItemStack costs = new ItemStack(Material.COAL_BLOCK, 1);
+    static int energyCost = 50;
     static PotionEffectType effectType = PotionEffectType.WITHER;
     private static ItemStack item;
     private static String name = "Wither Sword";
@@ -120,6 +121,22 @@ public class WitherSword {
 }
 
 class WitherSwordListener implements Listener {
+
+//    @EventHandler
+//    public void onRightclick(PlayerInteractEvent event) {
+//        Player player = event.getPlayer();
+//        PlayerInventory inv = player.getInventory();
+//        if (event.getAction() == Action.RIGHT_CLICK_AIR) {
+//            if (inv.contains(WitherSword.costs.getType(), WitherSword.costs.getAmount()) && (ItemUtils.isRegisterNameSimilar(WitherSword.regName,inv.getItemInMainHand()) || ItemUtils.isRegisterNameSimilar(WitherSword.regName,inv.getItemInOffHand()))) {
+//                inv.removeItem(WitherSword.costs);
+//                WitherSkull w = player.launchProjectile(WitherSkull.class);
+//                w.setVelocity((player.getEyeLocation().getDirection().multiply(Config.withersword_skullspeed)));
+//                w.setCharged(true);
+//                w.setCustomName("WitherSwordSkull");
+//            }
+//        }
+//    }
+
     @EventHandler
     public void onRightclick(PlayerInteractEvent event) {
         Player player = event.getPlayer();

@@ -12,8 +12,8 @@ public class EnergyManager {
     static HashMap<UUID, Integer> currentEnergy;
 
     public static void initialize(){
-        Main.getInstance().getServer().getOnlinePlayers().forEach(EnergyManager::register);
         currentEnergy = new HashMap<>();
+        Main.getInstance().getServer().getOnlinePlayers().forEach(EnergyManager::register);
         new BukkitRunnable(){
             @Override
             public void run(){

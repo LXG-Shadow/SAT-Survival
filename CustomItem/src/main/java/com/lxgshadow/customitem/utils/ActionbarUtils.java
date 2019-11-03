@@ -27,7 +27,7 @@ public class ActionbarUtils {
     }
 
     public static void send(Player player,String text){
-        sendRaw(player,"{\"text\": \"" + text + "\"}");
+        sendRaw(player,text);
 
     }
 
