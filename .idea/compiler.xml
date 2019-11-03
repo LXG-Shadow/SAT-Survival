@@ -6,14 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Survival" />
         <module name="AdvancedMob" />
         <module name="CustomItem" />
+        <module name="Survival" />
         <module name="tpa" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+      <module name="AdvancedMob" target="8" />
+      <module name="CustomItem" target="8" />
       <module name="CustomItem (1)" target="8" />
+      <module name="survival" target="8" />
+      <module name="Survival" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

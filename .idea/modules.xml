@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AdvancedMob/AdvancedMob.iml" filepath="$PROJECT_DIR$/AdvancedMob/AdvancedMob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CustomItem/CustomItem.iml" filepath="$PROJECT_DIR$/CustomItem/CustomItem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Survival/Survival.iml" filepath="$PROJECT_DIR$/Survival/Survival.iml" />
+      <module fileurl="file://$PROJECT_DIR$/survival.iml" filepath="$PROJECT_DIR$/survival.iml" />
+    </modules>
+  </component>
+</project>
