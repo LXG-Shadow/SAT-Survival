@@ -1,6 +1,7 @@
 package com.lxgshadow.customitem;
 
 import com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea;
+import com.lxgshadow.customitem.energySystem.energyDisplay;
 import com.lxgshadow.customitem.potionwand.PotionWandCore;
 import com.lxgshadow.customitem.UltimateWeapon.*;
 import com.lxgshadow.customitem.vehicle.carBoat;
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin {
     }
 
     private void registerEvents(){
+        this.getServer().getPluginManager().registerEvents(new energyDisplay(),this);
     }
 
     private void registerCommands(){
