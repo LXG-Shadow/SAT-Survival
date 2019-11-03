@@ -7,9 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Survival" />
-        <module name="tpa" />
-        <module name="CustomItem" />
         <module name="AdvancedMob" />
+        <module name="CustomItem" />
+        <module name="tpa" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">

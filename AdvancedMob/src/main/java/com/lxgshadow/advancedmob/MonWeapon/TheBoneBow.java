@@ -10,16 +10,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TheStoneSword {
+public class TheBoneBow {
     public static ItemStack item;
-    private static String name = "The Stone Sword";
+    private static String name = "The Bone Bow";
     private static String dpname = ChatColor.GRAY+name;
     private static String[] lores = {
-            ChatColor.WHITE+"Monster Weapon",
-            ChatColor.WHITE+"Description: Made by Stone"
+            ChatColor.WHITE+""+ChatColor.ITALIC+"Monster Weapon",
+            ChatColor.WHITE+""+ChatColor.ITALIC+"Description: Made by Bone"
     };
     public static void create(){
-        item = new ItemStack(Material.STONE_SWORD);
+        item = new ItemStack(Material.BOW);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(dpname);
         meta.setLore(new ArrayList<>(Arrays.asList(lores)));
@@ -28,8 +28,9 @@ public class TheStoneSword {
 
     public static ItemStack get(){
         ItemStack n = item.clone();
-        if (EtcUtils.chance(1,3)){n.addEnchantment(Enchantment.DAMAGE_ALL,EtcUtils.randInt(1,3));}
-        if (EtcUtils.chance(1,10)){n.addEnchantment(Enchantment.FIRE_ASPECT,EtcUtils.randInt(1,2));}
+        if (EtcUtils.chance(1,1)){n.addEnchantment(Enchantment.ARROW_DAMAGE,EtcUtils.randInt(1,5));}
+        if (EtcUtils.chance(1,3)){n.addEnchantment(Enchantment.ARROW_KNOCKBACK,EtcUtils.randInt(1,2));}
+        if (EtcUtils.chance(1,10)){n.addEnchantment(Enchantment.ARROW_FIRE,EtcUtils.randInt(1,2));}
         return n;
     }
 }

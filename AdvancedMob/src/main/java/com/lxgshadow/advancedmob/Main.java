@@ -1,6 +1,9 @@
 package com.lxgshadow.advancedmob;
 
+import com.lxgshadow.advancedmob.Modification.advancedSkeleton;
 import com.lxgshadow.advancedmob.Modification.advancedZombie;
+import com.lxgshadow.advancedmob.Modification.commonMonster;
+import com.lxgshadow.advancedmob.MonWeapon.TheBoneBow;
 import com.lxgshadow.advancedmob.MonWeapon.TheStoneSword;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,9 +31,12 @@ public class Main extends JavaPlugin {
 
     private void registerWeapons(){
         TheStoneSword.create();
+        TheBoneBow.create();
     }
     private void registerModification(){
+        this.getServer().getPluginManager().registerEvents(new commonMonster(),this);
         this.getServer().getPluginManager().registerEvents(new advancedZombie(),this);
+        this.getServer().getPluginManager().registerEvents(new advancedSkeleton(),this);
     }
 
 
