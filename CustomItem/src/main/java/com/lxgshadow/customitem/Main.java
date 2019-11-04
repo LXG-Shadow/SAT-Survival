@@ -1,8 +1,8 @@
 package com.lxgshadow.customitem;
 
 import com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea;
+import com.lxgshadow.customitem.AdvancedWeapon.PotionWand;
 import com.lxgshadow.customitem.energySystem.energyDisplay;
-import com.lxgshadow.customitem.potionwand.PotionWandCore;
 import com.lxgshadow.customitem.UltimateWeapon.*;
 import com.lxgshadow.customitem.vehicle.carBoat;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -40,12 +40,12 @@ public class Main extends JavaPlugin {
     private void registerRecipes(){
         GodApple.createRecipe();
         WitherSword.createRecipe();
-        PotionWandCore.initialize();
         LighteningWand.createRecipe();
         carBoat.createRecipe();
         AimbotBow.createRecipe();
         SoulSword.createRecipe();
         BowOfBlackTea.createRecipe();
+        PotionWand.createRecipe();
     }
 
     public static Main getInstance() {

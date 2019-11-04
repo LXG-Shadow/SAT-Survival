@@ -92,7 +92,7 @@ class SoulSwordListener implements Listener{
                     if (SoulSword.levelup.get(soul) != null){
                         meta.addEnchant(Enchantment.DAMAGE_ALL,SoulSword.levelup.get(soul),true);
                     }
-                    lores.set(i, ChatColor.WHITE+"Soul: "+soul);
+                    lores.set(i, ChatColor.WHITE+""+ChatColor.ITALIC+"Soul: "+soul);
                     break;
                 }
             }
