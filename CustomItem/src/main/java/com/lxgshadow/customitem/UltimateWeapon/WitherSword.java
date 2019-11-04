@@ -125,7 +125,7 @@ class WitherSwordListener implements Listener {
     @EventHandler
     public void onRightclick(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_AIR) {
-            if ((EnergyManager.change(event.getPlayer(),-WitherSword.energyCost,true)) &&
+            if ((EnergyManager.have(event.getPlayer(),WitherSword.energyCost)) &&
                     (ItemUtils.isRegisterNameSimilar(WitherSword.regName,event.getPlayer().getInventory().getItemInMainHand())
                             || ItemUtils.isRegisterNameSimilar(WitherSword.regName,event.getPlayer().getInventory().getItemInOffHand())))
             {
@@ -133,6 +133,7 @@ class WitherSwordListener implements Listener {
                 w.setVelocity((event.getPlayer().getEyeLocation().getDirection().multiply(Config.withersword_skullspeed)));
                 w.setCharged(true);
                 w.setCustomName("WitherSwordSkull");
+                EnergyManager.change(event.getPlayer(),-WitherSword.energyCost,true);
             }
         }
     }

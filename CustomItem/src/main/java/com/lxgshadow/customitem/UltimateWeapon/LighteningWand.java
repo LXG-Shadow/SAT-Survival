@@ -79,7 +79,8 @@ class LighteningWandListener implements Listener {
                     if ( e != null) {
                         player.getWorld().strikeLightning(e.getLocation());
                         if (e instanceof LivingEntity){((LivingEntity) e).damage(Config.lighteningwand_realdamage);}
-                        EnergyManager.change(event.getPlayer(),-LighteningWand.energyCost);
+                        EnergyManager.change(event.getPlayer(),-LighteningWand.energyCost,true);
+                        event.setCancelled(true);
                         return;
                     }
                 }
@@ -87,7 +88,9 @@ class LighteningWandListener implements Listener {
                 if (rr != null) {
                     if (rr.getHitBlock() != null) {
                         player.getWorld().strikeLightning(rr.getHitBlock().getLocation());
-                        EnergyManager.change(event.getPlayer(),-LighteningWand.energyCost);
+                        EnergyManager.change(event.getPlayer(),-LighteningWand.energyCost,true);
+                        event.setCancelled(true);
+                        return;
                     }
                 }
             }
