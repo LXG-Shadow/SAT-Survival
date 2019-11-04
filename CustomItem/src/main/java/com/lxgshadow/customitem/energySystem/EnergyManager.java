@@ -21,13 +21,21 @@ public class EnergyManager {
                     change(uuid,1);
                 }
             }
-        }.runTaskTimer(Main.getInstance(),0,5*20);
+        }.runTaskTimer(Main.getInstance(),0,1*20);
     }
 
     public static void register(Player player) {
         if (!currentEnergy.containsKey(player.getUniqueId())) {
             currentEnergy.put(player.getUniqueId(), getMaximum(player));
         }
+    }
+
+    public static boolean have(UUID uuid,int amount){
+        return (currentEnergy.get(uuid) != null) && (currentEnergy.get(uuid) >= amount);
+    }
+
+    public static boolean have(Player player,int amount){
+        return have(player.getUniqueId(),amount);
     }
 
     public static int getMaximum(UUID uuid) {
@@ -48,16 +56,25 @@ public class EnergyManager {
     }
 
     public static boolean change(UUID uuid, int amount) {
+        return change(uuid,amount,false);
+    }
+
+    public static boolean change(UUID uuid, int amount, boolean update) {
         if (((getCurrent(uuid) + amount) > getMaximum(uuid)) || ((getCurrent(uuid) + amount) < 0)) {
             return false;
         } else {
             currentEnergy.put(uuid, currentEnergy.get(uuid) + amount);
+            if (update){energyDisplay.update(Main.getInstance().getServer().getPlayer(uuid));}
             return true;
         }
     }
 
     public static boolean change(Player player, int amount) {
         return change(player.getUniqueId(),amount);
+    }
+
+    public static boolean change(Player player, int amount,boolean update) {
+        return change(player.getUniqueId(),amount,update);
     }
 
     public static String toText(Player player){
