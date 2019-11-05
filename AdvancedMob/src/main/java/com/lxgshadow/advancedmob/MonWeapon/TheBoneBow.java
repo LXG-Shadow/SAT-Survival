@@ -30,7 +30,7 @@ public class TheBoneBow {
         ItemStack n = item.clone();
         if (EtcUtils.chance(1,1)){n.addEnchantment(Enchantment.ARROW_DAMAGE,EtcUtils.randInt(1,5));}
         if (EtcUtils.chance(1,3)){n.addEnchantment(Enchantment.ARROW_KNOCKBACK,EtcUtils.randInt(1,2));}
-        if (EtcUtils.chance(1,10)){n.addEnchantment(Enchantment.ARROW_FIRE,EtcUtils.randInt(1,2));}
+        if (EtcUtils.chance(1,10)){n.addEnchantment(Enchantment.ARROW_FIRE,EtcUtils.randInt(1,1));}
         return n;
     }
 }

@@ -78,6 +78,6 @@ public class EnergyManager {
     }
 
     public static String toText(Player player){
-        return ChatColor.LIGHT_PURPLE+"Energy: "+getCurrent(player)+" / "+getMaximum(player);
+        return ChatColor.LIGHT_PURPLE+"Shama: "+getCurrent(player)+" / "+getMaximum(player);
     }
 }
