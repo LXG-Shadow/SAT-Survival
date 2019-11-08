@@ -8,6 +8,7 @@ import com.lxgshadow.customitem.commands.energyCommand;
 import com.lxgshadow.customitem.commands.getCICommand;
 import com.lxgshadow.customitem.energySystem.energyDisplay;
 import com.lxgshadow.customitem.UltimateWeapon.*;
+import com.lxgshadow.customitem.managers.playerUtilManager;
 import com.lxgshadow.customitem.vehicle.carBoat;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +24,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         Main.instance = this;
         Config.init();
+        registerManagers();
         registerCommands();
         registerEvents();
         registerRecipes();
@@ -32,6 +34,10 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("CustomItems Plugin Disabling");
+    }
+
+    private void registerManagers(){
+        playerUtilManager.initialize();
     }
 
     private void registerEvents(){

@@ -3,6 +3,7 @@ package com.lxgshadow.customitem.ArkNightsCollection;
 import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.energySystem.EnergyManager;
+import com.lxgshadow.customitem.managers.playerUtilManager;
 import com.lxgshadow.customitem.utils.ItemUtils;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -59,15 +60,15 @@ public class EyjafjallaVolcano implements CustomItems {
         meta.setLore(new ArrayList<>(Arrays.asList(lores)));
         meta.setUnbreakable(true);
         item.setItemMeta(meta);
-        ShapedRecipe r = new ShapedRecipe(new NamespacedKey(Main.getInstance(),regName),item);
-        r.shape("   ","   ","000");
-        r.setIngredient('0',Material.BLAZE_POWDER);
-        Main.getInstance().getServer().addRecipe(r);
+//        ShapedRecipe r = new ShapedRecipe(new NamespacedKey(Main.getInstance(),regName),item);
+//        r.shape("   ","   ","000");
+//        r.setIngredient('0',Material.BLAZE_POWDER);
+//        Main.getInstance().getServer().addRecipe(r);
         Main.getInstance().getServer().getPluginManager().registerEvents(new EyjafjallaVolcanoListener(),Main.getInstance());
     }
 
     public static void getConfig(){
-        volcanoDelay = 0.6;
+        volcanoDelay = 0.4;
         volcanoMaximum = 5;
         volcanoRange = 10;
         volcanoDamage = 16;
@@ -152,9 +153,15 @@ class EyjafjallaVolcanoListener implements Listener {
         particle.runTaskTimer(Main.getInstance(),0,0);
         player.setGravity(false);
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,3,2));
+        new BukkitRunnable(){
+            public void run(){
+                playerUtilManager.addPreventMove(player);
+            }
+        }.runTaskLater(Main.getInstance(),60);
     }
 
     private void playerDescend(Player player,BukkitRunnable particle){
+        playerUtilManager.removePreventMove(player);
         player.setGravity(true);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING,20,2));
         particle.cancel();
