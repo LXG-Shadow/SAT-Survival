@@ -100,17 +100,17 @@ class EyjafjallaVolcanoListener implements Listener {
                         t++;}
                     }
                 };
-                playerFloat(player,particle);
+                BukkitRunnable task = playerFloat(player,particle);
                 new BukkitRunnable(){
                     @Override
                     public void run(){
                         if (!EnergyManager.have(player,EyjafjallaVolcano.energyCostForSingleAttack)){
-                            playerDescend(player,particle);
+                            playerDescend(player,particle,task);
                             this.cancel();
                             return;
                         }
                         if (!ItemUtils.isRegisterNameSimilar(EyjafjallaVolcano.regName,inv.getItemInMainHand())){
-                            playerDescend(player,particle);
+                            playerDescend(player,particle,task);
                             EnergyManager.set(player,0);
                             this.cancel();
                             return;
@@ -149,18 +149,26 @@ class EyjafjallaVolcanoListener implements Listener {
         }
     }
 
-    private void playerFloat(Player player,BukkitRunnable particle){
+    private BukkitRunnable playerFloat(Player player,BukkitRunnable particle){
         particle.runTaskTimer(Main.getInstance(),0,0);
         player.setGravity(false);
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,3,2));
-        new BukkitRunnable(){
+        BukkitRunnable r =  new BukkitRunnable(){
+            private boolean stop = false;
+            public void setStop(){
+                stop = true;
+            }
             public void run(){
+                if (stop){return;}
                 playerUtilManager.addPreventMove(player);
             }
-        }.runTaskLater(Main.getInstance(),60);
+        };
+        r.runTaskLater(Main.getInstance(),60);
+        return r;
     }
 
-    private void playerDescend(Player player,BukkitRunnable particle){
+    private void playerDescend(Player player,BukkitRunnable particle,BukkitRunnable task){
+        task.cancel();
         playerUtilManager.removePreventMove(player);
         player.setGravity(true);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING,20,2));
