@@ -11,6 +11,7 @@ import java.util.List;
 public class SurvivalSBManager {
     private static List<PlayerScoreboard> scoreboards = new ArrayList<>();
     private static BukkitRunnable runnable;
+
     public static void initialize(){
         Main.getInstance().getServer().getOnlinePlayers().forEach(SurvivalSBManager::create);
         runnable = new BukkitRunnable() {

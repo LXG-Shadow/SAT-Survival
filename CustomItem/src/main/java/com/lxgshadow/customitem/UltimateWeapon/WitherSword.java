@@ -1,9 +1,11 @@
 package com.lxgshadow.customitem.UltimateWeapon;
 
 import com.lxgshadow.customitem.Config;
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 
 import com.lxgshadow.customitem.Messages;
+import com.lxgshadow.customitem.energySystem.EnergyManager;
 import com.lxgshadow.customitem.utils.EtcUtils;
 import com.lxgshadow.customitem.utils.ItemUtils;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
@@ -30,22 +32,21 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.security.MessageDigest;
 import java.util.*;
 
-public class WitherSword {
-    static ItemStack costs = new ItemStack(Material.COAL_BLOCK, 1);
+public class WitherSword implements CustomItems {
+    static int energyCost = 50;
     static PotionEffectType effectType = PotionEffectType.WITHER;
     private static ItemStack item;
     private static String name = "Wither Sword";
     private static String dpName = ChatColor.GOLD+name;
-    static String regName = name.replace(" ","_").toLowerCase();
+    public static String regName = name.replace(" ","_").toLowerCase();
     private static String corename = "Wither Sword Core";
     static ItemStack core;
     private static String[] lores = {
             ChatColor.GOLD+""+ChatColor.ITALIC+"Ultimate Weapon",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Description: I Am Withering",
-            ChatColor.WHITE+""+ChatColor.ITALIC+"*Using " + costs.getAmount() + " " + costs.getType().getKey().getKey() + " for launching a wither skull",
+            ChatColor.WHITE+""+ChatColor.ITALIC+"*Using " +energyCost +" energy for launching a wither skull",
             ChatColor.BLACK+"Register Name: ["+regName+"]"
     };
 
@@ -120,17 +121,19 @@ public class WitherSword {
 }
 
 class WitherSwordListener implements Listener {
+
     @EventHandler
     public void onRightclick(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        PlayerInventory inv = player.getInventory();
         if (event.getAction() == Action.RIGHT_CLICK_AIR) {
-            if (inv.contains(WitherSword.costs.getType(), WitherSword.costs.getAmount()) && (ItemUtils.isRegisterNameSimilar(WitherSword.regName,inv.getItemInMainHand()) || ItemUtils.isRegisterNameSimilar(WitherSword.regName,inv.getItemInOffHand()))) {
-                inv.removeItem(WitherSword.costs);
-                WitherSkull w = player.launchProjectile(WitherSkull.class);
-                w.setVelocity((player.getEyeLocation().getDirection().multiply(Config.withersword_skullspeed)));
+            if ((EnergyManager.have(event.getPlayer(),WitherSword.energyCost)) &&
+                    (ItemUtils.isRegisterNameSimilar(WitherSword.regName,event.getPlayer().getInventory().getItemInMainHand())
+                            || ItemUtils.isRegisterNameSimilar(WitherSword.regName,event.getPlayer().getInventory().getItemInOffHand())))
+            {
+                WitherSkull w = event.getPlayer().launchProjectile(WitherSkull.class);
+                w.setVelocity((event.getPlayer().getEyeLocation().getDirection().multiply(Config.withersword_skullspeed)));
                 w.setCharged(true);
                 w.setCustomName("WitherSwordSkull");
+                EnergyManager.change(event.getPlayer(),-WitherSword.energyCost,true);
             }
         }
     }

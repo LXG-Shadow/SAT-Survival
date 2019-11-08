@@ -1,7 +1,12 @@
 package com.lxgshadow.customitem;
 
+import com.lxgshadow.customitem.AdvancedTool.LumbererAxe;
 import com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea;
-import com.lxgshadow.customitem.potionwand.PotionWandCore;
+import com.lxgshadow.customitem.AdvancedWeapon.PotionWand;
+import com.lxgshadow.customitem.ArkNightsCollection.EyjafjallaVolcano;
+import com.lxgshadow.customitem.commands.energyCommand;
+import com.lxgshadow.customitem.commands.getCICommand;
+import com.lxgshadow.customitem.energySystem.energyDisplay;
 import com.lxgshadow.customitem.UltimateWeapon.*;
 import com.lxgshadow.customitem.vehicle.carBoat;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,20 +35,27 @@ public class Main extends JavaPlugin {
     }
 
     private void registerEvents(){
+        this.getServer().getPluginManager().registerEvents(new energyDisplay(),this);
     }
 
     private void registerCommands(){
+        this.getCommand("energy").setExecutor(new energyCommand(this));
+        this.getCommand("getcustomitem").setExecutor(new getCICommand());
     }
 
     private void registerRecipes(){
         GodApple.createRecipe();
         WitherSword.createRecipe();
-        PotionWandCore.initialize();
         LighteningWand.createRecipe();
         carBoat.createRecipe();
         AimbotBow.createRecipe();
         SoulSword.createRecipe();
+
         BowOfBlackTea.createRecipe();
+        PotionWand.createRecipe();
+        LumbererAxe.createRecipe();
+
+        EyjafjallaVolcano.createRecipe();
     }
 
     public static Main getInstance() {

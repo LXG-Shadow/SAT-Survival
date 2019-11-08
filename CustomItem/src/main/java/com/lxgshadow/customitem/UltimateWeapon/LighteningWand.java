@@ -1,7 +1,9 @@
 package com.lxgshadow.customitem.UltimateWeapon;
 
 import com.lxgshadow.customitem.Config;
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
+import com.lxgshadow.customitem.energySystem.EnergyManager;
 import com.lxgshadow.customitem.utils.IgnoreSelf;
 import com.lxgshadow.customitem.utils.ItemUtils;
 import org.bukkit.ChatColor;
@@ -24,8 +26,8 @@ import org.bukkit.util.RayTraceResult;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LighteningWand {
-    static ItemStack costs = new ItemStack(Material.GUNPOWDER, 1);
+public class LighteningWand implements CustomItems {
+    static int energyCost = 25;
     private static ItemStack item;
     private static String name = "Lightening Wand";
     private static String dpName = ChatColor.GOLD+name;
@@ -62,15 +64,15 @@ public class LighteningWand {
 }
 
 class LighteningWandListener implements Listener {
+
+    //todo: test lightening wand
     @EventHandler
     public void onRightclick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         PlayerInventory inv = player.getInventory();
         if (event.getAction() == Action.RIGHT_CLICK_AIR) {
-            if ((inv.contains(LighteningWand.costs.getType(), LighteningWand.costs.getAmount()))
+            if ((EnergyManager.have(event.getPlayer(),LighteningWand.energyCost))
                     && (ItemUtils.isRegisterNameSimilar(LighteningWand.regName,inv.getItemInMainHand()) || ItemUtils.isRegisterNameSimilar(LighteningWand.regName,inv.getItemInOffHand()))) {
-//                RayTraceResult rr = player.getWorld().rayTrace(player.getLocation(), player.getEyeLocation().getDirection(),
-//                        Config.lighteningwand_maxdistance,FluidCollisionMode.ALWAYS,false,1,null);
                 RayTraceResult rr = player.getWorld().rayTraceEntities(player.getEyeLocation(),player.getEyeLocation().getDirection(),
                         Config.lighteningwand_maxdistance,new IgnoreSelf(player));
                 if (rr != null) {
@@ -78,7 +80,8 @@ class LighteningWandListener implements Listener {
                     if ( e != null) {
                         player.getWorld().strikeLightning(e.getLocation());
                         if (e instanceof LivingEntity){((LivingEntity) e).damage(Config.lighteningwand_realdamage);}
-                        inv.removeItem(LighteningWand.costs);
+                        EnergyManager.change(event.getPlayer(),-LighteningWand.energyCost,true);
+                        event.setCancelled(true);
                         return;
                     }
                 }
@@ -86,7 +89,9 @@ class LighteningWandListener implements Listener {
                 if (rr != null) {
                     if (rr.getHitBlock() != null) {
                         player.getWorld().strikeLightning(rr.getHitBlock().getLocation());
-                        inv.removeItem(LighteningWand.costs);
+                        EnergyManager.change(event.getPlayer(),-LighteningWand.energyCost,true);
+                        event.setCancelled(true);
+                        return;
                     }
                 }
             }

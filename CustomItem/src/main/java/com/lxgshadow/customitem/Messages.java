@@ -10,4 +10,6 @@ public class Messages {
 
     public static String withersword_effect_victim = ChatColor.YELLOW+"*** 你遭受到了凋零剑的侵蚀";
     public static String withersword_effect_murderer = ChatColor.YELLOW+"*** 凋零效果被触发了";
+
+    public static String potionwand_effectchange = ChatColor.YELLOW+"*** 效果切换至 %(e)-%(a)";
 }

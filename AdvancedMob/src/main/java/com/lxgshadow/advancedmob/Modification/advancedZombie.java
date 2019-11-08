@@ -37,11 +37,11 @@ public class advancedZombie implements Listener {
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Zombie & event.getEntity() instanceof LivingEntity){
-            if (EtcUtils.chance(1,10)){((LivingEntity) event.getEntity())
+            if (EtcUtils.chance(1,8)){((LivingEntity) event.getEntity())
                     .addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION,EtcUtils.randInt(1,5)*20,EtcUtils.randInt(0,4)),true);}
-            if (EtcUtils.chance(1,10)){((LivingEntity) event.getEntity())
+            if (EtcUtils.chance(1,8)){((LivingEntity) event.getEntity())
                     .addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,EtcUtils.randInt(1,5)*20,EtcUtils.randInt(0,2)),true);}
-            if (EtcUtils.chance(1,10)){((LivingEntity) event.getEntity())
+            if (EtcUtils.chance(1,8)){((LivingEntity) event.getEntity())
                     .addPotionEffect(new PotionEffect(PotionEffectType.POISON,EtcUtils.randInt(1,5)*20,EtcUtils.randInt(0,2)),true);}
         }
     }

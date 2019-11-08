@@ -1,9 +1,8 @@
 package com.lxgshadow.customitem.AdvancedWeapon;
 
-import com.lxgshadow.customitem.Config;
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.Messages;
-import com.lxgshadow.customitem.UltimateWeapon.WitherSword;
 import com.lxgshadow.customitem.utils.EtcUtils;
 import com.lxgshadow.customitem.utils.ItemUtils;
 import org.bukkit.ChatColor;
@@ -16,18 +15,14 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
-public class BowOfBlackTea {
+public class BowOfBlackTea implements CustomItems {
     private static ItemStack item;
     private static String name = "Bow of Black Tea";
     private static String dpName = ChatColor.AQUA+name;

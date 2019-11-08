@@ -1,6 +1,7 @@
 package com.lxgshadow.advancedmob;
 
 import com.lxgshadow.advancedmob.Modification.advancedSkeleton;
+import com.lxgshadow.advancedmob.Modification.advancedSpider;
 import com.lxgshadow.advancedmob.Modification.advancedZombie;
 import com.lxgshadow.advancedmob.Modification.commonMonster;
 import com.lxgshadow.advancedmob.MonWeapon.TheBoneBow;
@@ -37,6 +38,7 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new commonMonster(),this);
         this.getServer().getPluginManager().registerEvents(new advancedZombie(),this);
         this.getServer().getPluginManager().registerEvents(new advancedSkeleton(),this);
+        this.getServer().getPluginManager().registerEvents(new advancedSpider(),this);
     }
 
 
