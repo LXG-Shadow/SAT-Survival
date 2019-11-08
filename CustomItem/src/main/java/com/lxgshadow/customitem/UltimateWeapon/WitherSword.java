@@ -1,6 +1,7 @@
 package com.lxgshadow.customitem.UltimateWeapon;
 
 import com.lxgshadow.customitem.Config;
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 
 import com.lxgshadow.customitem.Messages;
@@ -31,16 +32,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.security.MessageDigest;
 import java.util.*;
 
-public class WitherSword {
+public class WitherSword implements CustomItems {
     static int energyCost = 50;
     static PotionEffectType effectType = PotionEffectType.WITHER;
     private static ItemStack item;
     private static String name = "Wither Sword";
     private static String dpName = ChatColor.GOLD+name;
-    static String regName = name.replace(" ","_").toLowerCase();
+    public static String regName = name.replace(" ","_").toLowerCase();
     private static String corename = "Wither Sword Core";
     static ItemStack core;
     private static String[] lores = {

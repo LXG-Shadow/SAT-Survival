@@ -1,5 +1,6 @@
 package com.lxgshadow.customitem.UltimateWeapon;
 
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.utils.ItemUtils;
 import org.bukkit.ChatColor;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AimbotBow {
+public class AimbotBow implements CustomItems{
     private static ItemStack item;
     private static String name = "Aimisery Bow";
     private static String dpName = ChatColor.GOLD+name;

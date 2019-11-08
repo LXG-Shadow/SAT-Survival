@@ -1,5 +1,6 @@
 package com.lxgshadow.customitem.AdvancedWeapon;
 
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.Messages;
 import com.lxgshadow.customitem.energySystem.EnergyManager;
@@ -24,7 +25,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class PotionWand {
+public class PotionWand implements CustomItems {
     static int energyCost = 10;
     private static ItemStack item;
     private static String name = "Potion Wand";

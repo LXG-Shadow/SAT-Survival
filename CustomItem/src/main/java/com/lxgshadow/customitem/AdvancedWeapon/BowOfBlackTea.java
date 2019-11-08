@@ -1,5 +1,6 @@
 package com.lxgshadow.customitem.AdvancedWeapon;
 
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.Messages;
 import com.lxgshadow.customitem.utils.EtcUtils;
@@ -21,7 +22,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class BowOfBlackTea {
+public class BowOfBlackTea implements CustomItems {
     private static ItemStack item;
     private static String name = "Bow of Black Tea";
     private static String dpName = ChatColor.AQUA+name;

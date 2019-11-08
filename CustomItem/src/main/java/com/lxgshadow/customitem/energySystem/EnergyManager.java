@@ -77,6 +77,27 @@ public class EnergyManager {
         return change(player.getUniqueId(),amount,update);
     }
 
+    public static boolean set(UUID uuid, int amount){
+        return set(uuid,amount,false);
+
+    }
+    public static boolean set(Player player, int amount){
+        return set(player.getUniqueId(),amount,false);
+    }
+
+    public static boolean set(UUID uuid, int amount,boolean update){
+        if (currentEnergy.containsKey(uuid)){
+            currentEnergy.put(uuid,amount);
+            if (update){energyDisplay.update(Main.getInstance().getServer().getPlayer(uuid));}
+            return true;
+        }
+        return false;
+
+    }
+    public static boolean set(Player player, int amount,boolean update){
+        return set(player.getUniqueId(),amount,update);
+    }
+
     public static String toText(Player player){
         return ChatColor.LIGHT_PURPLE+"Shama: "+getCurrent(player)+" / "+getMaximum(player);
     }

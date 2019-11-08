@@ -1,6 +1,7 @@
 package com.lxgshadow.customitem.UltimateWeapon;
 
 import com.lxgshadow.customitem.Config;
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.energySystem.EnergyManager;
 import com.lxgshadow.customitem.utils.IgnoreSelf;
@@ -25,7 +26,7 @@ import org.bukkit.util.RayTraceResult;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LighteningWand {
+public class LighteningWand implements CustomItems {
     static int energyCost = 25;
     private static ItemStack item;
     private static String name = "Lightening Wand";

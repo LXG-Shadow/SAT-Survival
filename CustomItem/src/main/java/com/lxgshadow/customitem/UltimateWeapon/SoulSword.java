@@ -1,5 +1,6 @@
 package com.lxgshadow.customitem.UltimateWeapon;
 
+import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.utils.ItemUtils;
 import org.bukkit.ChatColor;
@@ -19,11 +20,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class SoulSword {
+public class SoulSword implements CustomItems {
     private static ItemStack item;
     private static String name = "Soul Sword";
     private static String dpName = ChatColor.GOLD+name;
-    static String regName = name.replace(" ","_").toLowerCase();
+    public static String regName = name.replace(" ","_").toLowerCase();
     static HashMap<Integer,Integer> levelup = new HashMap<>();
     private static String[] lores = {
             ChatColor.GOLD+""+ChatColor.ITALIC+"Ultimate Weapon",
