@@ -42,6 +42,7 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new vanishListener(),this);
         this.getServer().getPluginManager().registerEvents(new scoreboardRegListener(this),this);
         this.getServer().getPluginManager().registerEvents(new ChairsListener(),this);
+        this.getServer().getPluginManager().registerEvents(new deathMessageListener(),this);
     }
 
     private void registerCommands(){

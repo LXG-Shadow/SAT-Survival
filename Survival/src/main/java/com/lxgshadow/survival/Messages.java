@@ -62,4 +62,7 @@ public class Messages {
 
     public static String vanish_msg1 = "你已经成功隐身了";
     public static String vanish_msg2 = "你取消了隐身";
+
+
+    public static String death_location = "你死亡前的坐标为: %x, %y, %z";
 }
