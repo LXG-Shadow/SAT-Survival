@@ -1,24 +1,31 @@
 package com.lxgshadow.customitem.UltimateWeapon;
 
+import com.lxgshadow.customitem.Config;
+import com.lxgshadow.customitem.Messages;
 import com.lxgshadow.customitem.interfaces.CustomItems;
 import com.lxgshadow.customitem.Main;
+import com.lxgshadow.customitem.utils.EtcUtils;
 import com.lxgshadow.customitem.utils.ItemUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class SoulSword implements CustomItems {
     private static ItemStack item;
@@ -99,6 +106,34 @@ class SoulSwordListener implements Listener{
             }
             meta.setLore(lores);
             item.setItemMeta(meta);
+        }
+    }
+
+    @EventHandler
+    public void onHit(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player)) {
+            return;
+        }
+        PlayerInventory inv = ((Player) event.getDamager()).getInventory();
+        if (ItemUtils.isRegisterNameSimilar(SoulSword.regName,inv.getItemInMainHand())) {
+            if (EtcUtils.chance(3,10)) {
+                if (event.getEntity() instanceof LivingEntity) {
+                    EtcUtils.sendMessageIfPlayer(event.getEntity(), Messages.soulsword_effect_victim);
+                    EtcUtils.sendMessageIfPlayer(event.getDamager(), Messages.soulsword_effect_murderer);
+                    Entity victim = event.getEntity();
+                    int bleedingtime = EtcUtils.randInt(2,10);
+                    new BukkitRunnable(){
+                        int time = 0;
+                        public void run(){
+                            if (time>bleedingtime){
+                                return;
+                            }
+                            ((LivingEntity) victim).damage(2);
+                            time++;
+                        }
+                    }.runTaskTimer(Main.getInstance(),0,20);
+                }
+            }
         }
     }
 }

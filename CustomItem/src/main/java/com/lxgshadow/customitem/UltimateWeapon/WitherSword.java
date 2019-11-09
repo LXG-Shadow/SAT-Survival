@@ -27,6 +27,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -65,7 +66,8 @@ public class WitherSword implements CustomItems {
         item.setItemMeta(meta);
         ShapedRecipe r = new ShapedRecipe(new NamespacedKey(Main.getInstance(), regName), item);
         r.shape("121", "303", "121");
-        r.setIngredient('0', core.getType());
+        r.setIngredient('0', new RecipeChoice.ExactChoice(core));
+        //r.setIngredient('0', core.getType());
         r.setIngredient('1', Material.COAL_BLOCK);
         r.setIngredient('2', Material.DIAMOND_SWORD);
         r.setIngredient('3', Material.DIAMOND_BLOCK);
@@ -151,12 +153,12 @@ class WitherSwordListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void onCraft(CraftItemEvent event) {
-        if ((!event.getInventory().contains(WitherSword.core)) && event.getRecipe().getResult().isSimilar(WitherSword.getItem())) {
-            event.setCancelled(true);
-        }
-    }
+//    @EventHandler
+//    public void onCraft(CraftItemEvent event) {
+//        if ((!event.getInventory().contains(WitherSword.core)) && event.getRecipe().getResult().isSimilar(WitherSword.getItem())) {
+//            event.setCancelled(true);
+//        }
+//    }
 
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event) {
