@@ -70,9 +70,15 @@ class LumbererAxeListener implements Listener{
                 Location bl = block.getLocation();
                 breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,0,1)),item);
                 breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,0,-1)),item);
-                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,1,0)),item);
                 breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(1,0,0)),item);
                 breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(-1,0,0)),item);
+
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(1,0,1)),item);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(1,0,-1)),item);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(-1,0,1)),item);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(-1,0,-1)),item);
+
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,1,0)),item);
             }
         }.runTaskLater(Main.getInstance(),5);
 
