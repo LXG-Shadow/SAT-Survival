@@ -63,10 +63,10 @@ class LumbererAxeListener implements Listener{
 
     public void breakNearbyLogs(Block block, ItemStack item){
         if (!(Tag.LOGS.isTagged(block.getType())||Tag.LEAVES.isTagged(block.getType()))){return;}
+        block.breakNaturally(item);
         new BukkitRunnable(){
             @Override
             public void run(){
-                block.breakNaturally(item);
                 Location bl = block.getLocation();
                 breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,0,1)),item);
                 breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,0,-1)),item);

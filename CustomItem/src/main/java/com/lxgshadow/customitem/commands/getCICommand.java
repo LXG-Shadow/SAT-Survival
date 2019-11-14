@@ -1,8 +1,10 @@
 package com.lxgshadow.customitem.commands;
 
 import com.lxgshadow.customitem.AdvancedTool.LumbererAxe;
+import com.lxgshadow.customitem.AdvancedTool.MinerPickaxe;
 import com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea;
 import com.lxgshadow.customitem.AdvancedWeapon.PotionWand;
+import com.lxgshadow.customitem.ArkNightsCollection.ChiXiao;
 import com.lxgshadow.customitem.ArkNightsCollection.EyjafjallaVolcano;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.UltimateWeapon.AimbotBow;
@@ -34,6 +36,8 @@ public class getCICommand implements CommandExecutor,TabCompleter {
         items.put(BowOfBlackTea.regName,BowOfBlackTea.class);
         items.put(PotionWand.regName,PotionWand.class);
         items.put(LumbererAxe.regName,LumbererAxe.class);
+        items.put(MinerPickaxe.regName,MinerPickaxe.class);
+        items.put(ChiXiao.regName,ChiXiao.class);
     }
 
     @Override

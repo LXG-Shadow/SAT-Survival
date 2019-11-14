@@ -1,8 +1,10 @@
 package com.lxgshadow.customitem;
 
 import com.lxgshadow.customitem.AdvancedTool.LumbererAxe;
+import com.lxgshadow.customitem.AdvancedTool.MinerPickaxe;
 import com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea;
 import com.lxgshadow.customitem.AdvancedWeapon.PotionWand;
+import com.lxgshadow.customitem.ArkNightsCollection.ChiXiao;
 import com.lxgshadow.customitem.ArkNightsCollection.EyjafjallaVolcano;
 import com.lxgshadow.customitem.commands.energyCommand;
 import com.lxgshadow.customitem.commands.getCICommand;
@@ -60,8 +62,11 @@ public class Main extends JavaPlugin {
         BowOfBlackTea.createRecipe();
         PotionWand.createRecipe();
         LumbererAxe.createRecipe();
+        MinerPickaxe.createRecipe();
 
         EyjafjallaVolcano.createRecipe();
+        ChiXiao.createRecipe();
+
     }
 
     public static Main getInstance() {
