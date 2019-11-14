@@ -11,6 +11,7 @@ import com.lxgshadow.customitem.UltimateWeapon.AimbotBow;
 import com.lxgshadow.customitem.UltimateWeapon.LighteningWand;
 import com.lxgshadow.customitem.UltimateWeapon.SoulSword;
 import com.lxgshadow.customitem.UltimateWeapon.WitherSword;
+import com.lxgshadow.customitem.interfaces.CustomItemList;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,16 +29,9 @@ public class getCICommand implements CommandExecutor,TabCompleter {
 
     public getCICommand(){
         items = new HashMap<>();
-        items.put(EyjafjallaVolcano.regName,EyjafjallaVolcano.class);
-        items.put(AimbotBow.regName,AimbotBow.class);
-        items.put(SoulSword.regName,SoulSword.class);
-        items.put(WitherSword.regName,WitherSword.class);
-        items.put(LighteningWand.regName,LighteningWand.class);
-        items.put(BowOfBlackTea.regName,BowOfBlackTea.class);
-        items.put(PotionWand.regName,PotionWand.class);
-        items.put(LumbererAxe.regName,LumbererAxe.class);
-        items.put(MinerPickaxe.regName,MinerPickaxe.class);
-        items.put(ChiXiao.regName,ChiXiao.class);
+        for (CustomItemList item:CustomItemList.values()){
+            items.put(item.regName,item.clazz);
+        }
     }
 
     @Override
