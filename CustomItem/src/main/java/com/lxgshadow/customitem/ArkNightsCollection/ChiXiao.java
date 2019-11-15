@@ -46,6 +46,7 @@ public class ChiXiao {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(dpName);
         meta.setLore(new ArrayList<>(Arrays.asList(lores)));
+        meta.setUnbreakable(true);
         item.setItemMeta(meta);
         Main.getInstance().getServer().getPluginManager().registerEvents(new ChiXiaoListener(),Main.getInstance());
     }
@@ -185,12 +186,41 @@ class ChiXiaoSkills{
         HashSet<LivingEntity> livingEntities = new HashSet<>();
         for (int i=0;i<=6;i++){
             for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(front.clone().multiply(i)),
-                    1,1,1,new IgnoreSelf(player))){
+                    1.5,1.5,1.5,new IgnoreSelf(player))){
                 if (entity instanceof LivingEntity){
                     livingEntities.add((LivingEntity) entity);
                 }
             }
         }
+        for (Entity entity:player.getNearbyEntities(3,3,3)){
+            if (entity instanceof LivingEntity){
+                livingEntities.add((LivingEntity) entity);
+            }
+        }
+//        for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(left).add(front),
+//                1,1,1,new IgnoreSelf(player))){
+//            if (entity instanceof LivingEntity){
+//                livingEntities.add((LivingEntity) entity);
+//            }
+//        }
+//        for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(left),
+//                1,1,1,new IgnoreSelf(player))){
+//            if (entity instanceof LivingEntity){
+//                livingEntities.add((LivingEntity) entity);
+//            }
+//        }
+//        for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(right).add(front),
+//                1,1,1,new IgnoreSelf(player))){
+//            if (entity instanceof LivingEntity){
+//                livingEntities.add((LivingEntity) entity);
+//            }
+//        }
+//        for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(right),
+//                1,1,1,new IgnoreSelf(player))){
+//            if (entity instanceof LivingEntity){
+//                livingEntities.add((LivingEntity) entity);
+//            }
+//        }
         for (LivingEntity entity:livingEntities){
             entity.damage(1024,player);
         }
