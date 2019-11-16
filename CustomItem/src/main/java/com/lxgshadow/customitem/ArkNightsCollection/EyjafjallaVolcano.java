@@ -11,8 +11,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ShapedRecipe;
@@ -23,10 +25,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class EyjafjallaVolcano implements CustomItems {
     private static ItemStack item;
@@ -79,6 +78,10 @@ public class EyjafjallaVolcano implements CustomItems {
 }
 
 class EyjafjallaVolcanoListener implements Listener {
+    HashSet<UUID> players;
+    public EyjafjallaVolcanoListener(){
+        players = new HashSet<>();
+    }
     @EventHandler
     public void onRightClick(PlayerInteractEvent event){
         Player player = event.getPlayer();
@@ -90,6 +93,7 @@ class EyjafjallaVolcanoListener implements Listener {
                     double t = 0;
                     @Override
                     public void run(){
+                        if (!players.contains(player.getUniqueId())){this.cancel();return;}
                         for (int i=0;i<2;i++){
                         Location loc1 = player.getLocation();
                         loc1.add(0.8*Math.sin(t/16*Math.PI),1.3*Math.abs(Math.sin(t/100*Math.PI)),0.8*Math.cos(t/16*Math.PI));
@@ -101,9 +105,11 @@ class EyjafjallaVolcanoListener implements Listener {
                     }
                 };
                 BukkitRunnable task = playerFloat(player,particle);
+
                 new BukkitRunnable(){
                     @Override
                     public void run(){
+                        if (!players.contains(player.getUniqueId())){this.cancel();task.cancel();return;}
                         if (!EnergyManager.have(player,EyjafjallaVolcano.energyCostForSingleAttack)){
                             playerDescend(player,particle,task);
                             this.cancel();
@@ -149,7 +155,26 @@ class EyjafjallaVolcanoListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void onquit(PlayerQuitEvent event){
+        if (players.contains(event.getPlayer().getUniqueId())){
+            playerUtilManager.removePreventMove(event.getPlayer());
+            event.getPlayer().setGravity(true);
+            players.remove(event.getPlayer().getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public void ondead(PlayerDeathEvent event){
+        if (players.contains(event.getEntity().getUniqueId())){
+            playerUtilManager.removePreventMove(event.getEntity());
+            event.getEntity().setGravity(true);
+            players.remove(event.getEntity().getUniqueId());
+        }
+    }
+
     private BukkitRunnable playerFloat(Player player,BukkitRunnable particle){
+        players.add(player.getUniqueId());
         particle.runTaskTimer(Main.getInstance(),0,0);
         player.setGravity(false);
         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,3,2));
@@ -168,6 +193,7 @@ class EyjafjallaVolcanoListener implements Listener {
     }
 
     private void playerDescend(Player player,BukkitRunnable particle,BukkitRunnable task){
+        players.remove(player.getUniqueId());
         task.cancel();
         playerUtilManager.removePreventMove(player);
         player.setGravity(true);
