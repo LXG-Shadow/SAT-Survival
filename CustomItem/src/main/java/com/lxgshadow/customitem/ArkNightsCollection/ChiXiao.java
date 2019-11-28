@@ -4,6 +4,7 @@ import com.google.gson.internal.$Gson$Types;
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.utils.IgnoreSelf;
 import com.lxgshadow.customitem.utils.ItemUtils;
+import com.sun.xml.internal.ws.encoding.HasEncoding;
 import net.minecraft.server.v1_14_R1.NBTTagCompound;
 import net.minecraft.server.v1_14_R1.NBTTagInt;
 import net.minecraft.server.v1_14_R1.NBTTagList;
@@ -21,6 +22,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -130,10 +133,13 @@ class ChiXiaoListener implements Listener{
 
 }
 
-
 class ChiXiaoSkills{
     public static void choose(Player player,int s1,int s2,int s3){
         if (s1 == 1 && s2 == 1 && s3 == 0){
+            BaDao(player);
+            return;
+        }
+        if (s1 == 0 && s2 == 0 && s3 == 0){
             BaDao(player);
         }
     }
@@ -224,5 +230,22 @@ class ChiXiaoSkills{
         for (LivingEntity entity:livingEntities){
             entity.damage(1024,player);
         }
+    }
+
+    public static void QiaoJi(Player player){
+        HashSet<LivingEntity> livingEntities = new HashSet<>();
+        for (Entity entity:player.getNearbyEntities(3,3,3)){
+            if (entity instanceof LivingEntity){
+                livingEntities.add((LivingEntity) entity);
+            }
+        }
+        for (LivingEntity le : livingEntities){
+            le.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,20,66),true);
+            le.addPotionEffect(new PotionEffect(PotionEffectType.JUMP,20,-10),true);
+        }
+    }
+
+    public static void JueYing(Player player){
+        
     }
 }
