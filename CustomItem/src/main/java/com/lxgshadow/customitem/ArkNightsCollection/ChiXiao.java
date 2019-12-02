@@ -138,14 +138,45 @@ class ChiXiaoSkills{
             return;
         }
         if (s1 == 0 && s2 == 0 && s3 == 0){
-            BaDao(player);
+            QiaoJi(player);
         }
     }
+
     public static void BaDao(Player player){
         Location location = player.getLocation();
+        Vector direction = player.getEyeLocation().getDirection();
+        // lift up to the middle of player's height
+        location.add(0,0.8,0);
+        // front
+        Location temp;
+        HashSet<LivingEntity> livingEntities = new HashSet<>();
+        for (double i=0.2;i<=6;i+=0.2){
+            temp = location.clone().add(direction.clone().multiply(i));
+            // particle effect
+            for (int j=0;j<2;j++){
+                player.getWorld().spawnParticle(Particle.REDSTONE,temp,
+                        0,2,2,2,new Particle.DustOptions(Color.RED,2F));
+            }
+            for (Entity entity:player.getWorld().getNearbyEntities(temp,
+                    1.5,1.5,1.5,new IgnoreSelf(player))){
+                if (entity instanceof LivingEntity){
+                    livingEntities.add((LivingEntity) entity);
+                }
+            }
+        }
+        for (Entity entity:player.getNearbyEntities(3,3,3)){
+            if (entity instanceof LivingEntity){
+                livingEntities.add((LivingEntity) entity);
+            }
+        }
+        for (LivingEntity entity:livingEntities){
+            entity.damage(1024,player);
+        }
+    }
+
+    public static void BaDao1(Player player){
+        Location location = player.getLocation();
         Location eyeLocation = player.getEyeLocation();
-        Vector direction = eyeLocation.getDirection();
-        player.sendMessage(eyeLocation.getYaw()+"");
         double yaw = eyeLocation.getYaw();
         if (yaw < 0){
             yaw += 360;
@@ -158,24 +189,16 @@ class ChiXiaoSkills{
         Vector front,left,right;
         if (yaw >= 315 || yaw < 45){
             front = new Vector(0,0,1);
-            left = new Vector(1,0,0);
-            right = new Vector(-1,0,0);
         }
         else if (yaw >= 45 && yaw < 135){
             front = new Vector(-1,0,0);
-            left = new Vector(0,0,1);
-            right = new Vector(0,0,-1);
         }
         else if (yaw >= 135 && yaw < 225){
             front = new Vector(0,0,-1);
-            left = new Vector(-1,0,0);
-            right = new Vector(1,0,0);
         }
         //if (yaw >= -135 && yaw <-45){
         else {
             front = new Vector(1,0,0);
-            left = new Vector(0,0,-1);
-            right = new Vector(0,0,1);
         }
         // lift up to the middle of player's height
         location.add(0,0.8,0);
@@ -201,30 +224,6 @@ class ChiXiaoSkills{
                 livingEntities.add((LivingEntity) entity);
             }
         }
-//        for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(left).add(front),
-//                1,1,1,new IgnoreSelf(player))){
-//            if (entity instanceof LivingEntity){
-//                livingEntities.add((LivingEntity) entity);
-//            }
-//        }
-//        for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(left),
-//                1,1,1,new IgnoreSelf(player))){
-//            if (entity instanceof LivingEntity){
-//                livingEntities.add((LivingEntity) entity);
-//            }
-//        }
-//        for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(right).add(front),
-//                1,1,1,new IgnoreSelf(player))){
-//            if (entity instanceof LivingEntity){
-//                livingEntities.add((LivingEntity) entity);
-//            }
-//        }
-//        for (Entity entity:player.getWorld().getNearbyEntities(location.clone().add(right),
-//                1,1,1,new IgnoreSelf(player))){
-//            if (entity instanceof LivingEntity){
-//                livingEntities.add((LivingEntity) entity);
-//            }
-//        }
         for (LivingEntity entity:livingEntities){
             entity.damage(1024,player);
         }
