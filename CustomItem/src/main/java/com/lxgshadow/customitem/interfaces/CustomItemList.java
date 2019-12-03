@@ -4,6 +4,7 @@ import com.lxgshadow.customitem.AdvancedTool.LumbererAxe;
 import com.lxgshadow.customitem.AdvancedTool.MinerPickaxe;
 import com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea;
 import com.lxgshadow.customitem.AdvancedWeapon.PotionWand;
+import com.lxgshadow.customitem.ArkNightsCollection.ArkNightsCollectionBox;
 import com.lxgshadow.customitem.ArkNightsCollection.ChiXiao;
 import com.lxgshadow.customitem.ArkNightsCollection.EyjafjallaVolcano;
 import com.lxgshadow.customitem.UltimateWeapon.AimbotBow;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum CustomItemList {
+    ArkNightsCollectionBox(com.lxgshadow.customitem.ArkNightsCollection.ArkNightsCollectionBox.regName,com.lxgshadow.customitem.ArkNightsCollection.ArkNightsCollectionBox.class),
     EyjafjallaVolcano(com.lxgshadow.customitem.ArkNightsCollection.EyjafjallaVolcano.regName,com.lxgshadow.customitem.ArkNightsCollection.EyjafjallaVolcano.class),
     ChiXiao(com.lxgshadow.customitem.ArkNightsCollection.ChiXiao.regName, com.lxgshadow.customitem.ArkNightsCollection.ChiXiao.class),
 

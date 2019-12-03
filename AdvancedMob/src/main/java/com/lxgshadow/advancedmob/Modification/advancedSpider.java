@@ -18,7 +18,7 @@ public class advancedSpider implements Listener{
             if (EtcUtils.chance(1,6)){
                 ((LivingEntity) event.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,EtcUtils.randInt(1,5)*20,EtcUtils.randInt(0,2)),true);
             }
-            if (EtcUtils.chance(1,3)){
+            if (EtcUtils.chance(5,7)){
                 event.getEntity().getWorld().getBlockAt(event.getEntity().getLocation()).setType(Material.COBWEB);
             }
         }

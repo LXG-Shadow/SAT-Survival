@@ -1,4 +1,4 @@
-package com.lxgshadow.customitem.vehicle;
+package com.lxgshadow.customitem.normal;
 
 import com.lxgshadow.customitem.Config;
 import com.lxgshadow.customitem.Main;
@@ -14,7 +14,6 @@ import org.bukkit.event.vehicle.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Arrays;

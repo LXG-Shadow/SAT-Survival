@@ -4,6 +4,7 @@ import com.lxgshadow.customitem.AdvancedTool.LumbererAxe;
 import com.lxgshadow.customitem.AdvancedTool.MinerPickaxe;
 import com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea;
 import com.lxgshadow.customitem.AdvancedWeapon.PotionWand;
+import com.lxgshadow.customitem.ArkNightsCollection.ArkNightsCollectionBox;
 import com.lxgshadow.customitem.ArkNightsCollection.ChiXiao;
 import com.lxgshadow.customitem.ArkNightsCollection.EyjafjallaVolcano;
 import com.lxgshadow.customitem.commands.energyCommand;
@@ -11,7 +12,7 @@ import com.lxgshadow.customitem.commands.getCICommand;
 import com.lxgshadow.customitem.energySystem.energyDisplay;
 import com.lxgshadow.customitem.UltimateWeapon.*;
 import com.lxgshadow.customitem.managers.playerUtilManager;
-import com.lxgshadow.customitem.vehicle.carBoat;
+import com.lxgshadow.customitem.normal.carBoat;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -64,6 +65,8 @@ public class Main extends JavaPlugin {
         LumbererAxe.createRecipe();
         MinerPickaxe.createRecipe();
 
+
+        ArkNightsCollectionBox.createRecipe();
         EyjafjallaVolcano.createRecipe();
         ChiXiao.createRecipe();
 
