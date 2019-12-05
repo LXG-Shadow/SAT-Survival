@@ -2,13 +2,20 @@ package com.lxgshadow.customitem.AdvancedTool;
 
 import com.lxgshadow.customitem.Main;
 import com.lxgshadow.customitem.interfaces.CustomItems;
+import com.lxgshadow.customitem.utils.EtcUtils;
 import com.lxgshadow.customitem.utils.ItemUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExpEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -73,24 +80,54 @@ class MinerPickaxeListener implements Listener {
         Player player = event.getPlayer();
         if (ItemUtils.isRegisterNameSimilar(MinerPickaxe.regName,player.getInventory().getItemInMainHand())){
             if (MinerPickaxe.minerals.contains(event.getBlock().getType())){
-                breakNearbyLogs(event.getBlock(),player.getInventory().getItemInMainHand(),event.getBlock().getType());
+                breakNearbyLogs(event.getBlock(),player.getInventory().getItemInMainHand(),event.getBlock().getType(),player);
             }
         }
     }
-    public void breakNearbyLogs(Block block, ItemStack item,Material material){
+
+    public void breakNearbyLogs(Block block, ItemStack item, Material material, Player player){
         if (material != block.getType()){
             return;
         }
+        // fix bug: no exp drop
+        int exp;
+        switch (material){
+            case DIAMOND_ORE:
+            case EMERALD_ORE:
+                exp = EtcUtils.randInt(3,7);
+                break;
+            case LAPIS_ORE:
+            case NETHER_QUARTZ_ORE:
+                exp = EtcUtils.randInt(2,5);
+                break;
+            case REDSTONE_ORE:
+                exp = EtcUtils.randInt(1,5);
+                break;
+            case COAL:
+                exp = EtcUtils.randInt(0,2);
+                break;
+            default:
+                exp = 0;
+                break;
+        }
         block.breakNaturally(item);
+
+        if (exp != 0){
+            ExperienceOrb expo = (ExperienceOrb) player.getWorld().spawnEntity(block.getLocation(), EntityType.EXPERIENCE_ORB);
+            // fix bug of less xp caused by merging happens before setExperience
+            expo.setExperience(expo.getExperience()+exp);
+        }
+
+
         new BukkitRunnable(){
             public void run(){
                 Location bl = block.getLocation();
-                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,0,1)),item,material);
-                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,0,-1)),item,material);
-                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(1,0,0)),item,material);
-                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(-1,0,0)),item,material);
-                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,1,0)),item,material);
-                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,-1,0)),item,material);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,0,1)),item,material,player);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,0,-1)),item,material,player);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(1,0,0)),item,material,player);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(-1,0,0)),item,material,player);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,1,0)),item,material,player);
+                breakNearbyLogs(block.getWorld().getBlockAt(bl.clone().add(0,-1,0)),item,material,player);
             }
         }.runTaskLater(Main.getInstance(),5);
     }
