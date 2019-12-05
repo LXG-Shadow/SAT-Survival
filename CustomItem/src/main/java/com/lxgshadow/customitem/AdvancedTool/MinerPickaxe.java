@@ -103,7 +103,7 @@ class MinerPickaxeListener implements Listener {
             case REDSTONE_ORE:
                 exp = EtcUtils.randInt(1,5);
                 break;
-            case COAL:
+            case COAL_ORE:
                 exp = EtcUtils.randInt(0,2);
                 break;
             default:
