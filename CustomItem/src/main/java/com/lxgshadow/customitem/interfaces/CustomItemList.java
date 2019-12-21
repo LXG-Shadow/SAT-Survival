@@ -23,9 +23,11 @@ public enum CustomItemList {
 
     BowOfBlackTea(com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea.regName,com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea.class),
     PotionWand(com.lxgshadow.customitem.AdvancedWeapon.PotionWand.regName,com.lxgshadow.customitem.AdvancedWeapon.PotionWand.class),
+    DullahanSword(com.lxgshadow.customitem.AdvancedWeapon.DullahanSword.regName,com.lxgshadow.customitem.AdvancedWeapon.DullahanSword.class),
 
     LumbererAxe(com.lxgshadow.customitem.AdvancedTool.LumbererAxe.regName,com.lxgshadow.customitem.AdvancedTool.LumbererAxe.class),
     MinerPickaxe(com.lxgshadow.customitem.AdvancedTool.MinerPickaxe.regName,com.lxgshadow.customitem.AdvancedTool.MinerPickaxe.class),
+
 
     AimbotBow(com.lxgshadow.customitem.UltimateWeapon.AimbotBow.regName,com.lxgshadow.customitem.UltimateWeapon.AimbotBow.class),
     LighteningWand(com.lxgshadow.customitem.UltimateWeapon.LighteningWand.regName,com.lxgshadow.customitem.UltimateWeapon.LighteningWand.class),

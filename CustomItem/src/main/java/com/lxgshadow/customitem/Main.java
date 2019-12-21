@@ -3,6 +3,7 @@ package com.lxgshadow.customitem;
 import com.lxgshadow.customitem.AdvancedTool.LumbererAxe;
 import com.lxgshadow.customitem.AdvancedTool.MinerPickaxe;
 import com.lxgshadow.customitem.AdvancedWeapon.BowOfBlackTea;
+import com.lxgshadow.customitem.AdvancedWeapon.DullahanSword;
 import com.lxgshadow.customitem.AdvancedWeapon.PotionWand;
 import com.lxgshadow.customitem.ArkNightsCollection.ArkNightsCollectionBox;
 import com.lxgshadow.customitem.ArkNightsCollection.ChiXiao;
@@ -62,6 +63,8 @@ public class Main extends JavaPlugin {
 
         BowOfBlackTea.createRecipe();
         PotionWand.createRecipe();
+        DullahanSword.createRecipe();
+
         LumbererAxe.createRecipe();
         MinerPickaxe.createRecipe();
 
@@ -69,7 +72,6 @@ public class Main extends JavaPlugin {
         ArkNightsCollectionBox.createRecipe();
         EyjafjallaVolcano.createRecipe();
         ChiXiao.createRecipe();
-
     }
 
     public static Main getInstance() {
