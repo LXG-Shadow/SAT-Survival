@@ -1,3 +1,5 @@
+package com.lxgshadow.easyduel;
+
 public class Config {
     public static void init() {
         setDefault();

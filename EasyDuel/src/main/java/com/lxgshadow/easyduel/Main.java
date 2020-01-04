@@ -1,3 +1,7 @@
+package com.lxgshadow.easyduel;
+
+import com.lxgshadow.easyduel.arena.ArenaManager;
+import com.lxgshadow.easyduel.commands.newarean;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -6,7 +10,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        getLogger().info("Survival Plugin Loading");
+        getLogger().info("Easy Duel Loading");
     }
 
     @Override
@@ -23,15 +27,15 @@ public class Main extends JavaPlugin {
     }
 
     private void initializeManagers(){
-
+        ArenaManager.initialize();
     }
 
     private void registerEvents(){
-
     }
 
     private void registerCommands(){
-
+        this.getCommand("newarena").setExecutor(new newarean());
+        this.getCommand("cancelarena").setExecutor(new newarean());
     }
 
 

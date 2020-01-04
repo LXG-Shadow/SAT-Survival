@@ -41,11 +41,11 @@ public class DullahanSword implements CustomItems {
         meta.setDisplayName(dpName);
         meta.setLore(new ArrayList<>(Arrays.asList(lores)));
         item.setItemMeta(meta);
-//        ShapedRecipe r = new ShapedRecipe(new NamespacedKey(Main.getInstance(),regName),item);
-//        r.shape("101","101","101");
-//        r.setIngredient('0',Material.IRON_SWORD);
-//        r.setIngredient('1',Material.REDSTONE_BLOCK);
-//        Main.getInstance().getServer().addRecipe(r);
+        ShapedRecipe r = new ShapedRecipe(new NamespacedKey(Main.getInstance(),regName),item);
+        r.shape("101","101","101");
+        r.setIngredient('0',Material.IRON_SWORD);
+        r.setIngredient('1',Material.REDSTONE_BLOCK);
+        Main.getInstance().getServer().addRecipe(r);
         Main.getInstance().getServer().getPluginManager().registerEvents(new DullahanSwordListener(),Main.getInstance());
     }
 }
