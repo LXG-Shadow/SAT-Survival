@@ -4,7 +4,8 @@ import com.lxgshadow.easyduel.arena.ArenaManager;
 import com.lxgshadow.easyduel.commands.newarean;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin {
+public class
+Main extends JavaPlugin {
     private static Main instance;
 
 
