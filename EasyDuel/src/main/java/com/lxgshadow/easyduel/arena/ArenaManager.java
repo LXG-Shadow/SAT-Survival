@@ -4,7 +4,9 @@ import com.lxgshadow.easyduel.Main;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class ArenaManager {
@@ -29,25 +31,19 @@ public class ArenaManager {
         // todo: check player distance, check in same world
         //todo: use arenasize
         Arena arena = new Arena(id,defaultSize,1,players);
-//        int x =0;
-//        int y=0;
-//        int z=0;
-//        for (Player p:players){
-//            x+=p.getLocation().getBlockX();
-//            y+=p.getLocation().getBlockY();
-//            z+=p.getLocation().getBlockZ();
-//        }
-//        x = x/players.length;
-//        y = y/players.length;
-//        z = z/players.length;
-//        arenas.put(id,new Location(players[0].getWorld(),x,y,z));
-//        arenaSize.put(id,defaultSize);
-//        for (Player p:players){
-//            playerIn.put(p.getUniqueId(),id);
-//        }
         arenas.put(id,arena);
         id ++;
         return true;
+    }
+
+    public static Arena[] getAllArena(){
+        Arena[] as = new Arena[arenas.values().size()];
+        int index = 0;
+        for (Arena arena:arenas.values()){
+            as[index] = arena;
+            index++;
+        }
+        return as;
     }
 
     public static void remove(int id){

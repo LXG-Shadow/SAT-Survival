@@ -4,6 +4,9 @@ import com.lxgshadow.easyduel.Main;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.UUID;
 
 
@@ -18,6 +21,7 @@ public class Arena {
     private UUID[] players;
     private UUID[] winners;
     private UUID[] losers;
+    private HashMap<UUID, HashSet<Location>> showing;
     private Location center;
     private int[] margin;
     public Arena(int id, int size, int mode,Player[] players){
@@ -25,6 +29,10 @@ public class Arena {
         this.size = size;
         this.mode = mode;
         this.players = getUUIDs(players);
+        this.showing = new HashMap<>();
+        for (UUID uuid:this.players){
+            showing.put(uuid,new HashSet<>());
+        }
         calCenter();
     }
 
@@ -38,6 +46,14 @@ public class Arena {
 
     public int[] getMargin() {
         return margin;
+    }
+
+    public UUID[] getPlayers(){
+        return this.players;
+    }
+
+    public HashMap<UUID,HashSet<Location>> getShowing(){
+        return this.showing;
     }
 
     public boolean checkFinish(){
