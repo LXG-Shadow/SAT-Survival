@@ -20,12 +20,10 @@ public class newarean implements CommandExecutor {
             player.sendMessage("new");
             player.sendMessage(ArenaManager.create(new Player[]{player})+"");
             player.sendMessage(ArenaManager.getArenaId(player)+"");
-            player.sendMessage(Arrays.toString(ArenaManager.getArena(ArenaManager.getArenaId(player))));
         }
         if (cmd.getName().equalsIgnoreCase("cancelarena")){
             player.sendMessage("cancel");
             player.sendMessage(ArenaManager.getArenaId(player)+"");
-            player.sendMessage(Arrays.toString(ArenaManager.getArena(ArenaManager.getArenaId(player))) +"");
             ArenaManager.remove(ArenaManager.getArenaId(player));
         }
         return true;

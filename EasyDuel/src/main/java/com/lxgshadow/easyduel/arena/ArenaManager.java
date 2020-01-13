@@ -36,6 +36,20 @@ public class ArenaManager {
         return true;
     }
 
+    public static boolean create(Player[] players,int mode){
+        for (Player p:players){
+            if (getArenaId(p) != -1){
+                return false;
+            }
+        }
+        // todo: check player distance, check in same world
+        //todo: use arenasize
+        Arena arena = new Arena(id,defaultSize,mode,players);
+        arenas.put(id,arena);
+        id ++;
+        return true;
+    }
+
     public static Arena[] getAllArena(){
         Arena[] as = new Arena[arenas.values().size()];
         int index = 0;
@@ -59,10 +73,7 @@ public class ArenaManager {
         return -1;
     }
 
-    public static int[] getArena(int id){
-        if (arenas.get(id) == null){
-            return new int[]{};
-        }
-        return arenas.get(id).getMargin();
+    public static Arena getArena(int id){
+        return arenas.get(id);
     }
 }

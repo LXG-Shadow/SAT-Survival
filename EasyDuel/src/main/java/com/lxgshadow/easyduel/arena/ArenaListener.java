@@ -3,9 +3,11 @@ package com.lxgshadow.easyduel.arena;
 import com.lxgshadow.easyduel.Main;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -40,6 +42,7 @@ public class ArenaListener implements Listener {
             }
         }.runTaskTimer(Main.getInstance(),0,1);
     }
+
     @EventHandler
     public void onMove(PlayerMoveEvent event){
         Player player = event.getPlayer();
@@ -47,7 +50,23 @@ public class ArenaListener implements Listener {
         if (aid == -1){
             return;
         }
-        int[] margin = ArenaManager.getArena(aid);
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageEvent event){
+        if (!(event.getEntity() instanceof Player)){return;}
+        Player player = (Player) event.getEntity();
+        int aid = ArenaManager.getArenaId(player);
+        if (aid == -1){
+            return;
+        }
+        Arena arena = ArenaManager.getArena(aid);
+        int mode = arena.getMode();
+        if (mode == 1){
+            if (player.getHealth() - event.getFinalDamage() < 0){
+
+            }
+        }
     }
 
     public void showBoarder(Player player,Arena arena,int y){
