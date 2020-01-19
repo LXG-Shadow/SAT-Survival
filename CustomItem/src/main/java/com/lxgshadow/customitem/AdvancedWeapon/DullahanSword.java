@@ -21,11 +21,12 @@ import java.util.Arrays;
 
 public class DullahanSword implements CustomItems {
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.AQUA;
     private static String name = "Dullahan Sword";
-    private static String dpName = ChatColor.AQUA+"Dullahan's Sword";
+    private static String dpName = itemColor+"Dullahan's Sword";
     public static String regName = name.replace(" ","_").toLowerCase();
     private static String[] lores = {
-            ChatColor.AQUA+""+ChatColor.ITALIC+"Advanced Weapon",
+            itemColor+""+ChatColor.ITALIC+"Advanced Weapon",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Description: Where is my head?",
             ChatColor.WHITE+""+ChatColor.ITALIC+"*Player drop head when killed by this sword",
             ChatColor.BLACK+"Register Name: ["+regName+"]"
@@ -34,6 +35,7 @@ public class DullahanSword implements CustomItems {
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe(){
         item = new ItemStack(Material.IRON_SWORD);

@@ -24,11 +24,12 @@ import java.util.Arrays;
 
 public class BowOfBlackTea implements CustomItems {
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.AQUA;
     private static String name = "Bow of Black Tea";
-    private static String dpName = ChatColor.AQUA+name;
+    private static String dpName = itemColor+name;
     public static String regName = name.replace(" ","_").toLowerCase();
     private static String[] lores = {
-            ChatColor.AQUA+""+ChatColor.ITALIC+"Advanced Weapon",
+            itemColor+""+ChatColor.ITALIC+"Advanced Weapon",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Description: 紅茶だけができますか？",
             ChatColor.WHITE+""+ChatColor.ITALIC+"*每次射中生物时，有 1% 的概率额外造成14的真实伤害",
             ChatColor.WHITE+""+ChatColor.ITALIC+"*有 5% 的概率额外造成14秒的失明眩晕虚弱缓慢",
@@ -38,6 +39,7 @@ public class BowOfBlackTea implements CustomItems {
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe(){
         item = new ItemStack(Material.BOW);

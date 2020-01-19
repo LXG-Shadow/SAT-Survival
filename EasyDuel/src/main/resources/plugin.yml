@@ -5,5 +5,4 @@ api-version: 1.13
 author: lxgshadow
 depend:
 commands:
-  newarena:
-  cancelarena:
+  duel:

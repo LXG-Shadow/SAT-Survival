@@ -1,7 +1,7 @@
 package com.lxgshadow.easyduel;
 
 import com.lxgshadow.easyduel.arena.ArenaManager;
-import com.lxgshadow.easyduel.commands.newarean;
+import com.lxgshadow.easyduel.commands.duel;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class
@@ -35,8 +35,7 @@ Main extends JavaPlugin {
     }
 
     private void registerCommands(){
-        this.getCommand("newarena").setExecutor(new newarean());
-        this.getCommand("cancelarena").setExecutor(new newarean());
+        this.getCommand("duel").setExecutor(new duel());
     }
 
 

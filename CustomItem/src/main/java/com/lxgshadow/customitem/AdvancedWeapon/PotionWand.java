@@ -28,11 +28,12 @@ import java.util.List;
 public class PotionWand implements CustomItems {
     static int energyCost = 10;
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.AQUA;
     private static String name = "Potion Wand";
-    private static String dpName = ChatColor.AQUA + name;
+    private static String dpName = itemColor + name;
     public static String regName = name.replace(" ", "_").toLowerCase();
     private static String[] lores = {
-            ChatColor.AQUA + "" + ChatColor.ITALIC + "Advanced Weapon",
+            itemColor + "" + ChatColor.ITALIC + "Advanced Weapon",
             ChatColor.WHITE + "" + ChatColor.ITALIC + "Description: Avada Kedavra! ",
             ChatColor.WHITE + "" + ChatColor.ITALIC + "Effect: Speed-1",
             ChatColor.BLACK + "Register Name: [" + regName + "]"
@@ -45,6 +46,7 @@ public class PotionWand implements CustomItems {
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe() {
         getConfig();

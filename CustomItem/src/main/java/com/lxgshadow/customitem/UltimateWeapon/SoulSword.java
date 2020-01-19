@@ -30,11 +30,12 @@ import java.util.*;
 public class SoulSword implements CustomItems {
     private static ItemStack item;
     private static String name = "Soul Sword";
-    private static String dpName = ChatColor.GOLD+name;
+    private static ChatColor itemColor = ChatColor.GOLD;
+    private static String dpName = itemColor+name;
     public static String regName = name.replace(" ","_").toLowerCase();
     static HashMap<Integer,Integer> levelup = new HashMap<>();
     private static String[] lores = {
-            ChatColor.GOLD+""+ChatColor.ITALIC+"Ultimate Weapon",
+            itemColor+""+ChatColor.ITALIC+"Ultimate Weapon",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Description: Blood Strength",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Soul: 0",
             ChatColor.BLACK+"Register Name: ["+regName+"]"
@@ -44,6 +45,7 @@ public class SoulSword implements CustomItems {
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe(){
         getConfig();

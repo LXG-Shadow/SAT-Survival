@@ -41,4 +41,13 @@ public enum CustomItemList {
         this.clazz = clazz;
         this.regName = regName;
     }
+
+    public static CustomItemList getCIL(String regName){
+        for (CustomItemList ci:CustomItemList.values()){
+            if (ci.regName.equals(regName)){
+                return ci;
+            }
+        }
+        return null;
+    }
 }

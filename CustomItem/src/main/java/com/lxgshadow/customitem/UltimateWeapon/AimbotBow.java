@@ -24,11 +24,12 @@ import java.util.List;
 
 public class AimbotBow implements CustomItems{
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.GOLD;
     private static String name = "Aimisery Bow";
-    private static String dpName = ChatColor.GOLD+name;
+    private static String dpName = itemColor+name;
     public static String regName = name.replace(" ","_").toLowerCase();
     private static String[] lores = {
-            ChatColor.GOLD+""+ChatColor.ITALIC+"Ultimate Weapon",
+            itemColor+""+ChatColor.ITALIC+"Ultimate Weapon",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Description: I got you in my sights",
             ChatColor.BLACK+"Register Name: ["+regName+"]"
     };
@@ -36,6 +37,7 @@ public class AimbotBow implements CustomItems{
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe(){
         item = new ItemStack(Material.BOW);

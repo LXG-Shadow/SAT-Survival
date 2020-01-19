@@ -29,11 +29,12 @@ import java.util.Arrays;
 public class LighteningWand implements CustomItems {
     static int energyCost = 25;
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.GOLD;
     private static String name = "Lightening Wand";
-    private static String dpName = ChatColor.GOLD+name;
+    private static String dpName = itemColor+name;
     public static String regName = name.replace(" ","_").toLowerCase();
     private static String[] lores = {
-            ChatColor.GOLD+""+ChatColor.ITALIC+"Ultimate Weapon",
+            itemColor+""+ChatColor.ITALIC+"Ultimate Weapon",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Description: The Anger From God",
             ChatColor.WHITE+""+ChatColor.ITALIC+"*Maximum Distance " + Config.lighteningwand_maxdistance,
             ChatColor.BLACK+"Register Name: ["+regName+"]"
@@ -42,6 +43,7 @@ public class LighteningWand implements CustomItems {
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe() {
         item = new ItemStack(Material.BLAZE_ROD);

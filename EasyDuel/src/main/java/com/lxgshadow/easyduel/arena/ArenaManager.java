@@ -1,18 +1,12 @@
 package com.lxgshadow.easyduel.arena;
 
 import com.lxgshadow.easyduel.Main;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
 public class ArenaManager {
     private static HashMap<Integer, Arena> arenas;
-//    private static HashMap<Integer, Integer> arenaSize;
-//    private static HashMap<UUID,Integer> playerIn;
     private static int id;
     private static int defaultSize;
     public static void initialize(){
@@ -22,29 +16,19 @@ public class ArenaManager {
         Main.getInstance().getServer().getPluginManager().registerEvents(new ArenaListener(),Main.getInstance());
     }
 
-    public static boolean create(Player[] players){
+    public static boolean create(ArrayList<Player> players, ArrayList<Integer> team, int mode, int size){
         for (Player p:players){
             if (getArenaId(p) != -1){
                 return false;
             }
         }
         // todo: check player distance, check in same world
-        //todo: use arenasize
-        Arena arena = new Arena(id,defaultSize,1,players);
-        arenas.put(id,arena);
-        id ++;
-        return true;
-    }
+        // todo: use arenasize
 
-    public static boolean create(Player[] players,int mode){
-        for (Player p:players){
-            if (getArenaId(p) != -1){
-                return false;
-            }
+        Arena arena = new Arena(id,size,mode,players,team);
+        if (arena.getPlayerOutOfBoarder().size()>0){
+            return false;
         }
-        // todo: check player distance, check in same world
-        //todo: use arenasize
-        Arena arena = new Arena(id,defaultSize,mode,players);
         arenas.put(id,arena);
         id ++;
         return true;

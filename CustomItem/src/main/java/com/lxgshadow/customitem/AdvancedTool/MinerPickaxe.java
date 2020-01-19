@@ -27,11 +27,12 @@ import java.util.List;
 
 public class MinerPickaxe implements CustomItems {
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.AQUA;
     private static String name = "Miner Pickaxe";
-    private static String dpName = ChatColor.AQUA+"Miner's Axe";
+    private static String dpName = itemColor+"Miner's Axe";
     public static String regName = name.replace(" ","_").toLowerCase();
     private static String[] lores = {
-            ChatColor.AQUA+""+ChatColor.ITALIC+"Advanced Tool",
+            itemColor+""+ChatColor.ITALIC+"Advanced Tool",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Description: So we back in the mine,",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Got our pickaxe swimming from side to side",
             ChatColor.WHITE+""+ChatColor.ITALIC+"*Mine all connected minerals",
@@ -42,6 +43,8 @@ public class MinerPickaxe implements CustomItems {
     public static ItemStack getItem() {
         return item;
     }
+
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe(){
         getConfig();

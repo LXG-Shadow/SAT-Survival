@@ -51,7 +51,6 @@ public class getCICommand implements CommandExecutor,TabCompleter {
                 return completions;
             }
         }
-        //todo:changeto immutableList.of()
         return new ArrayList<>();
     }
 

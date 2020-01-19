@@ -19,11 +19,12 @@ import java.util.Arrays;
 
 public class LumbererAxe implements CustomItems {
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.AQUA;
     private static String name = "Lumberer Axe";
-    private static String dpName = ChatColor.AQUA+"Lumberer's Axe";
+    private static String dpName = itemColor+"Lumberer's Axe";
     public static String regName = name.replace(" ","_").toLowerCase();
     private static String[] lores = {
-            ChatColor.AQUA+""+ChatColor.ITALIC+"Advanced Tool",
+            itemColor+""+ChatColor.ITALIC+"Advanced Tool",
             ChatColor.WHITE+""+ChatColor.ITALIC+"Description: Protect Environment? Never heard of it.",
             ChatColor.WHITE+""+ChatColor.ITALIC+"*Cutting down the entire tree",
             ChatColor.BLACK+"Register Name: ["+regName+"]"
@@ -32,6 +33,7 @@ public class LumbererAxe implements CustomItems {
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe(){
         item = new ItemStack(Material.IRON_AXE);

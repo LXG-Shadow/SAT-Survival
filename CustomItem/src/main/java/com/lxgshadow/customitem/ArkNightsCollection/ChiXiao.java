@@ -28,8 +28,9 @@ import java.util.*;
 
 public class ChiXiao {
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.DARK_RED;
     private static String name = "ChiXiao";
-    private static String dpName = ChatColor.DARK_RED+"赤霄";
+    private static String dpName = itemColor+"赤霄";
     public static String regName = name.replace(" ","_").toLowerCase();
     private static String[] lores = {
             ChatColor.GOLD+""+ChatColor.ITALIC+"Ultimate Weapon",
@@ -40,6 +41,7 @@ public class ChiXiao {
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe(){
         item = createBaseSword();

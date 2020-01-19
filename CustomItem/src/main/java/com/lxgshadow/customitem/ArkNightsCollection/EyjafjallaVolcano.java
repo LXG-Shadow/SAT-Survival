@@ -29,11 +29,12 @@ import java.util.*;
 
 public class EyjafjallaVolcano implements CustomItems {
     private static ItemStack item;
+    private static ChatColor itemColor = ChatColor.GOLD;
     private static String name = "Eyjafjalla Volcano";
-    private static String dpName = ChatColor.GOLD+"艾雅法拉 · 火山";
+    private static String dpName = itemColor+"艾雅法拉 · 火山";
     public static String regName = name.replace(" ","_").toLowerCase();
     private static String[] lores = {
-            ChatColor.GOLD+""+ChatColor.ITALIC+"Ultimate Weapon",
+            itemColor+""+ChatColor.ITALIC+"Ultimate Weapon",
             ChatColor.WHITE+""+ChatColor.ITALIC+"隐秘的极地精灵,冰与火的孕育之地",
             ChatColor.GOLD+""+ChatColor.UNDERLINE+"*明日方舟收藏品*",
             ChatColor.BLACK+"Register Name: ["+regName+"]"
@@ -50,6 +51,7 @@ public class EyjafjallaVolcano implements CustomItems {
     public static ItemStack getItem() {
         return item;
     }
+    public static ChatColor getItemColor(){return itemColor;}
 
     public static void createRecipe(){
         getConfig();
