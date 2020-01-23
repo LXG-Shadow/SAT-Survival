@@ -1,6 +1,7 @@
 package com.lxgshadow.easyduel;
 
 import com.lxgshadow.easyduel.arena.ArenaManager;
+import com.lxgshadow.easyduel.commands.EasyDuel;
 import com.lxgshadow.easyduel.commands.duel;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,7 +36,7 @@ Main extends JavaPlugin {
     }
 
     private void registerCommands(){
-        this.getCommand("duel").setExecutor(new duel());
+        this.getCommand("duel").setExecutor(new EasyDuel());
     }
 
 

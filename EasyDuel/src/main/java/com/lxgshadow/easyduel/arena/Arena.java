@@ -16,6 +16,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -60,7 +61,6 @@ public class Arena {
             showing.put(player.getUniqueId(), new HashSet<>());
         }
         calCenter();
-        sendStartInfo();
     }
 
     public Location getCenter() {
@@ -99,6 +99,20 @@ public class Arena {
                 if (player.getHealth() - event.getFinalDamage() < 0) {
                     this.alive.put(player, 0);
                     event.setCancelled(true);
+                }
+            }
+            if (mode == 2){
+                if (e instanceof EntityDamageByEntityEvent){
+                    Entity edbe = ((EntityDamageByEntityEvent) e).getDamager();
+                    if (edbe instanceof Player && ((EntityDamageByEntityEvent) e).getFinalDamage() > 0){
+                        this.alive.put(player,0);
+                        event.setCancelled(true);
+                    }
+                    if (edbe instanceof Projectile && ((Projectile) edbe).getShooter() instanceof Player
+                            && ((EntityDamageByEntityEvent) e).getFinalDamage() > 0) {
+                        this.alive.put(player,0);
+                         event.setCancelled(true);
+                    }
                 }
             }
             this.updateStatus();
@@ -231,9 +245,6 @@ public class Arena {
                 for (Player player1:team2){
                     opps.append(player1.getDisplayName()).append(",");
                 }
-
-
-
             }
             opps.delete(opps.length() - 1, opps.length());
             player.sendMessage(opps.toString());

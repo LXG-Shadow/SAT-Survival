@@ -51,7 +51,6 @@ public class homeCommands implements CommandExecutor, TabCompleter {
                 break;
             }
         }
-        //todo:changeto immutableList.of()
         return new ArrayList<>();
     }
 

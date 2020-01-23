@@ -67,7 +67,6 @@ public class LighteningWand implements CustomItems {
 
 class LighteningWandListener implements Listener {
 
-    //todo: test lightening wand
     @EventHandler
     public void onRightclick(PlayerInteractEvent event) {
         Player player = event.getPlayer();

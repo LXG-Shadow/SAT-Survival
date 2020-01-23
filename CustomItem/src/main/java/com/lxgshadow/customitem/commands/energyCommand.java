@@ -34,7 +34,6 @@ public class energyCommand implements CommandExecutor,TabCompleter {
                 return completions;
             }
         }
-        //todo:changeto immutableList.of()
         return new ArrayList<>();
     }
     @Override

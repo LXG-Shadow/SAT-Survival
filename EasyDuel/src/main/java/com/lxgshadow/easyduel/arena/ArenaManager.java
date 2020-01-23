@@ -1,5 +1,6 @@
 package com.lxgshadow.easyduel.arena;
 
+import com.lxgshadow.easyduel.Config;
 import com.lxgshadow.easyduel.Main;
 import org.bukkit.entity.Player;
 
@@ -8,11 +9,9 @@ import java.util.HashMap;
 public class ArenaManager {
     private static HashMap<Integer, Arena> arenas;
     private static int id;
-    private static int defaultSize;
     public static void initialize(){
         id = 0;
         arenas = new HashMap<>();
-        defaultSize = 16;
         Main.getInstance().getServer().getPluginManager().registerEvents(new ArenaListener(),Main.getInstance());
     }
 
@@ -22,15 +21,16 @@ public class ArenaManager {
                 return false;
             }
         }
-        // todo: check player distance, check in same world
-        // todo: use arenasize
 
+        if (ArenaModes.getName(mode) == null){return false;}
         Arena arena = new Arena(id,size,mode,players,team);
+        // check player in the arena size
         if (arena.getPlayerOutOfBoarder().size()>0){
             return false;
         }
         arenas.put(id,arena);
         id ++;
+        arena.sendStartInfo();
         return true;
     }
 

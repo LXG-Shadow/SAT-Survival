@@ -1,12 +1,15 @@
 package com.lxgshadow.easyduel;
 
 public class Config {
+    public static int arena_defaultsize;
     public static void init() {
         setDefault();
+        arena_defaultsize = getInt("arena.defaultsize");
 
     }
 
     private static void setDefault(){
+        Main.getInstance().getConfig().addDefault("arena.defaultsize",16);
         Main.getInstance().getConfig().options().copyDefaults(true);
         Main.getInstance().saveConfig();
     }
