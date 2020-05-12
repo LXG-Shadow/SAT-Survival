@@ -7,6 +7,8 @@ public class Config {
     public static String mysql_username="root";
     public static String mysql_password="root";
 
+    public static String scoreboard_title;
+
     public static int tpa_cooldown;
     public static int home_maxNum;
     public static int team_maxSize;
@@ -22,12 +24,21 @@ public class Config {
         mysql_username = getString("mysql.username");
         mysql_password = getString("mysql.password");
 
+        scoreboard_title = getString("scoreboard.title");
+
     }
 
     private static void setDefault(){
         Main.getInstance().getConfig().addDefault("home.maxNum",3);
         Main.getInstance().getConfig().addDefault("team.maxSize",3);
         Main.getInstance().getConfig().addDefault("tpa.cooldown",60);
+        Main.getInstance().getConfig().addDefault("mysql.address","127.0.0.1");
+        Main.getInstance().getConfig().addDefault("mysql.port","3306");
+        Main.getInstance().getConfig().addDefault("mysql.db","mcserver");
+        Main.getInstance().getConfig().addDefault("mysql.username","root");
+        Main.getInstance().getConfig().addDefault("mysql.password","root");
+
+        Main.getInstance().getConfig().addDefault("scoreboard.title","Survival");
         Main.getInstance().getConfig().options().copyDefaults(true);
         Main.getInstance().saveConfig();
     }

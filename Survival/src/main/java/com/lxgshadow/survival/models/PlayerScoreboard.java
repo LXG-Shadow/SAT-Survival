@@ -1,5 +1,6 @@
 package com.lxgshadow.survival.models;
 
+import com.lxgshadow.survival.Config;
 import com.lxgshadow.survival.Main;
 import com.lxgshadow.survival.scoreboard.SurvivalScoreboard;
 import com.lxgshadow.survival.scoreboard.sideBar;
@@ -25,7 +26,7 @@ public class PlayerScoreboard {
         textList.put(2,"Username: "+p.getName());
         textList.put(3,"Time: waiting for update...");
         textList.put(1,"Ping: " + ((CraftPlayer) plugin.getServer().getPlayer(player)).getHandle().ping);
-        sdb = new sideBar(p,"sidebar","dummy","SAT Survival",textList);
+        sdb = new sideBar(p,"sidebar","dummy", Config.scoreboard_title,textList);
         sb.register(sdb);
     }
 

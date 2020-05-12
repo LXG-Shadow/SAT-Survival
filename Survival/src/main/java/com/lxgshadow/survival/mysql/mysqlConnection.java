@@ -2,6 +2,7 @@ package com.lxgshadow.survival.mysql;
 
 import com.lxgshadow.survival.Config;
 import com.lxgshadow.survival.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import sun.nio.cs.ext.MacArabic;
 
@@ -27,6 +28,8 @@ public class mysqlConnection {
         }catch(Exception se){
             // 处理 JDBC 错误
             se.printStackTrace();
+            Main.disablePlugin("Mysql connection error");
+            return;
         }
         // 重启conn
         re = new BukkitRunnable(){
@@ -39,6 +42,8 @@ public class mysqlConnection {
                     Main.getInstance().getLogger().info("Mysql Connection Established");
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    Main.disablePlugin("Mysql connection error");
+                    re.cancel();
                 }
             }
         };
@@ -47,6 +52,9 @@ public class mysqlConnection {
 
     public static void close(){
         Main.getInstance().getLogger().info("Close mysql connection");
+        if (re == null){
+            return;
+        }
         re.cancel();
         try {
             conn.close();

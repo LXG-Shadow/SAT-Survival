@@ -63,4 +63,9 @@ public class Main extends JavaPlugin {
     public static Main getInstance() {
         return instance;
     }
+
+    public static void disablePlugin(String reason){
+        instance.getLogger().info("Due to ' "+reason+" ', this plugin is going to be disabled.");
+        instance.getServer().getPluginManager().disablePlugin(instance);
+    }
 }

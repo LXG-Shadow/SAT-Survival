@@ -5,7 +5,6 @@ public class Config {
     public static void init() {
         setDefault();
         arena_defaultsize = getInt("arena.defaultsize");
-
     }
 
     private static void setDefault(){
