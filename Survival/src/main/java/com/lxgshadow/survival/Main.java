@@ -49,6 +49,7 @@ public class Main extends JavaPlugin {
     private void registerCommands(){
         this.getCommand("suicide").setExecutor(new suicideCommands());
         this.getCommand("ec").setExecutor(new enderchestCommands());
+        this.getCommand("hat").setExecutor(new hatCommands());
         this.getCommand("tpa").setExecutor(new tpaCommands(this));
         this.getCommand("team").setExecutor(new teamCommands(this));
         this.getCommand("home").setExecutor(new homeCommands(this));
@@ -60,6 +61,7 @@ public class Main extends JavaPlugin {
         this.getCommand("unvanish").setExecutor(new vanishCommands(this));
         this.getCommand("forcemsg").setExecutor(new forcemsgCommands(this));
         this.getCommand("openinv").setExecutor(new openinvCommands(this));
+
     }
 
 

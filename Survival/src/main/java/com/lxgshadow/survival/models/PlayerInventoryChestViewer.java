@@ -2,21 +2,33 @@ package com.lxgshadow.survival.models;
 
 import org.bukkit.Bukkit;
 
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.RandomStringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.UUID;
 
 
 public class PlayerInventoryChestViewer{
     private String id;
+    private UUID puuid;
+    public static HashSet<Integer> unused = new HashSet<>(Arrays.asList(27,28,29,30,31,32,33,34,35,40,42,43,44));
     private Inventory inventory;
     private PlayerInventory pInventory;
 
     public PlayerInventoryChestViewer(Player player){
         this.id = RandomStringUtils.randomAlphanumeric(6);
+        this.puuid = player.getUniqueId();
         inventory = Bukkit.createInventory(null,54,"InvViewer - "+player.getName()+ " - ["+id+"]");
         pInventory = player.getInventory();
         this.player2inventory();
+
+
     }
 
     public Inventory getInventory() {
@@ -37,6 +49,15 @@ public class PlayerInventoryChestViewer{
             items[i] = pInventory.getArmorContents()[i-36];
         }
         items[41] = pInventory.getExtraContents()[0];
+
+        ItemStack bglass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+        ItemMeta meta = bglass.getItemMeta();
+        meta.setDisplayName("Refresh Inventory");
+        bglass.setItemMeta(meta);
+
+        for (int i:this.unused){
+            items[i] = bglass;
+        }
 
         inventory.setContents(items);
     }
@@ -65,5 +86,11 @@ public class PlayerInventoryChestViewer{
     public String getId() {
         return id;
     }
+
+    public UUID getPuuid() {
+        return puuid;
+    }
+
+
 }
 
