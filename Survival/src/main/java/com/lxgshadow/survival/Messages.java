@@ -13,6 +13,8 @@ public class Messages {
     public static String suicide_Msg = "AWSL";
     public static String broadcase_Msg = "[System Message]: %(m)";
 
+    public static String forcemsg_Player404 ="找不到该玩家或该玩家已下线";
+
     public static String team_404 ="没有找到该队伍";
     public static String team_NotIn = "你不在任何一个队伍里";
     public static String team_AlreadyIn = "你已经在队伍%(t)里了";
@@ -62,6 +64,8 @@ public class Messages {
 
     public static String vanish_msg1 = "你已经成功隐身了";
     public static String vanish_msg2 = "你取消了隐身";
+
+
 
 
     public static String death_location = "你死亡前的坐标为: %x, %y, %z";

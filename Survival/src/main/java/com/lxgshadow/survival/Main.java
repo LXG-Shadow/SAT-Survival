@@ -2,9 +2,9 @@ package com.lxgshadow.survival;
 
 import com.lxgshadow.survival.commands.*;
 import com.lxgshadow.survival.listeners.*;
+import com.lxgshadow.survival.managers.PicvManager;
 import com.lxgshadow.survival.managers.SurvivalSBManager;
 import com.lxgshadow.survival.mysql.mysqlConnection;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -34,6 +34,7 @@ public class Main extends JavaPlugin {
 
     private void initializeManagers(){
         SurvivalSBManager.initialize();
+        PicvManager.initialtize();
     }
 
     private void registerEvents(){
@@ -57,6 +58,8 @@ public class Main extends JavaPlugin {
         this.getCommand("broadcast").setExecutor(new broadcastCommands(this));
         this.getCommand("vanish").setExecutor(new vanishCommands(this));
         this.getCommand("unvanish").setExecutor(new vanishCommands(this));
+        this.getCommand("forcemsg").setExecutor(new forcemsgCommands(this));
+        this.getCommand("openinv").setExecutor(new openinvCommands(this));
     }
 
 

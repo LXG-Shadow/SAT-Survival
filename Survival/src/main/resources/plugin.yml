@@ -16,3 +16,5 @@ commands:
   unvanish:
   ec:
     aliases: [enderchest]
+  forcemsg:
+  openinv:
