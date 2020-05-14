@@ -9,11 +9,13 @@ import sun.nio.cs.ext.MacArabic;
 import java.sql.*;
 
 public class mysqlConnection {
+    private static boolean status;
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static BukkitRunnable re;
     public static Connection conn;
 
     public static void initialize(){
+        status = false;
         String url = "jdbc:mysql://"+ Config.mysql_address+":"+Config.mysql_port+"/"+Config.mysql_db+"?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true";
         try{
             // 注册 JDBC 驱动
@@ -28,7 +30,7 @@ public class mysqlConnection {
         }catch(Exception se){
             // 处理 JDBC 错误
             se.printStackTrace();
-            Main.disablePlugin("Mysql connection error");
+            //Main.disablePlugin("Mysql connection error");
             return;
         }
         // 重启conn
@@ -42,12 +44,14 @@ public class mysqlConnection {
                     Main.getInstance().getLogger().info("Mysql Connection Established");
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    status = false;
                     Main.disablePlugin("Mysql connection error");
                     re.cancel();
                 }
             }
         };
         re.runTaskTimer(Main.getInstance(),0,60*20*60*2);
+        status = true;
     }
 
     public static void close(){
@@ -154,5 +158,9 @@ public class mysqlConnection {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static boolean getStatus(){
+        return status;
     }
 }

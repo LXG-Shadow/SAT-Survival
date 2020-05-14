@@ -3,6 +3,7 @@ package com.lxgshadow.survival.commands;
 import com.lxgshadow.survival.Config;
 import com.lxgshadow.survival.Messages;
 import com.lxgshadow.survival.managers.HomeManager;
+import com.lxgshadow.survival.mysql.mysqlConnection;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,6 +26,9 @@ public class homeCommands implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> completions = new ArrayList<>();
+        if (!mysqlConnection.getStatus()){
+            return completions;
+        }
         switch (args.length) {
             case 1: {
                 List<String> possibles = new ArrayList<>();
@@ -59,6 +63,11 @@ public class homeCommands implements CommandExecutor, TabCompleter {
         if (!(sender instanceof Player)){
             return true;
         }
+        if (!mysqlConnection.getStatus()){
+            sender.sendMessage(Messages.mysql_fail);
+            return true;
+        }
+
         HomeManager hm = new HomeManager((Player) sender);
         Player p = (Player) sender;
 
