@@ -66,7 +66,7 @@ public class Messages {
     public static String vanish_msg2 = "你取消了隐身";
 
 
-    public static String mysql_fail = "未连接到数据库";
+    public static String mysql_fail = "未连接到数据库, 请联系管理员";
 
     public static String death_location = "你死亡前的坐标为: %x, %y, %z";
 }

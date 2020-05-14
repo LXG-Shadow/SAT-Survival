@@ -30,6 +30,7 @@ public class mysqlConnection {
         }catch(Exception se){
             // 处理 JDBC 错误
             se.printStackTrace();
+            Main.getInstance().getLogger().warning("Mysql connection error, some function may not working properly");
             //Main.disablePlugin("Mysql connection error");
             return;
         }
