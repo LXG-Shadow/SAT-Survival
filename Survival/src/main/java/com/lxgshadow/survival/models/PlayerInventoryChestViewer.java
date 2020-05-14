@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.UUID;
 
 
+
 public class PlayerInventoryChestViewer{
     private String id;
     private UUID puuid;
@@ -90,6 +91,10 @@ public class PlayerInventoryChestViewer{
 
         pInventory.setExtraContents(extra);
 
+        if (this.offline){
+            offplayer.saveData();
+        }
+
     }
 
     public String getId() {
@@ -98,12 +103,6 @@ public class PlayerInventoryChestViewer{
 
     public UUID getPuuid() {
         return puuid;
-    }
-
-    public void saveData(){
-        if (this.offline){
-            offplayer.saveData();
-        }
     }
 }
 

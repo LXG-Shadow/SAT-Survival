@@ -20,6 +20,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 import java.util.UUID;
 
+// todo: using same method for online and offline player
+
 public class PicvManager {
     private static HashMap<String, PlayerInventoryChestViewer> picvs;
     private static HashMap<UUID, String> targets;
@@ -62,7 +64,6 @@ public class PicvManager {
 
     public static void delete(String id) {
         if (picvs.containsKey(id)){
-            picvs.get(id).saveData();
             targets.remove(picvs.remove(id).getPuuid());
         }
     }
