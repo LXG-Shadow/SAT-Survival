@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.RandomStringUtils;
+import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,6 +18,8 @@ import java.util.UUID;
 public class PlayerInventoryChestViewer{
     private String id;
     private UUID puuid;
+    private boolean offline;
+    private CraftPlayer offplayer;
     public static HashSet<Integer> unused = new HashSet<>(Arrays.asList(27,28,29,30,31,32,33,34,35,40,42,43,44));
     private Inventory inventory;
     private PlayerInventory pInventory;
@@ -24,12 +27,17 @@ public class PlayerInventoryChestViewer{
     public PlayerInventoryChestViewer(Player player){
         this.id = RandomStringUtils.randomAlphanumeric(6);
         this.puuid = player.getUniqueId();
+        this.offline = false;
         inventory = Bukkit.createInventory(null,54,"InvViewer - "+player.getName()+ " - ["+id+"]");
         pInventory = player.getInventory();
         this.player2inventory();
 
-
+        if (!player.isOnline()){
+            this.offline = true;
+            offplayer = (CraftPlayer) player;
+        }
     }
+
 
     public Inventory getInventory() {
         return inventory;
@@ -81,6 +89,7 @@ public class PlayerInventoryChestViewer{
         extra[0] = inv[41];
 
         pInventory.setExtraContents(extra);
+
     }
 
     public String getId() {
@@ -91,6 +100,10 @@ public class PlayerInventoryChestViewer{
         return puuid;
     }
 
-
+    public void saveData(){
+        if (this.offline){
+            offplayer.saveData();
+        }
+    }
 }
 

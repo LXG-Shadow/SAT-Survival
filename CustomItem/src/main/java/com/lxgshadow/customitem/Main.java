@@ -13,6 +13,8 @@ import com.lxgshadow.customitem.commands.getCICommand;
 import com.lxgshadow.customitem.energySystem.energyDisplay;
 import com.lxgshadow.customitem.UltimateWeapon.*;
 import com.lxgshadow.customitem.managers.playerUtilManager;
+import com.lxgshadow.customitem.normal.ExpBottle;
+import com.lxgshadow.customitem.normal.GodApple;
 import com.lxgshadow.customitem.normal.carBoat;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -55,6 +57,8 @@ public class Main extends JavaPlugin {
 
     private void registerRecipes(){
         GodApple.createRecipe();
+        ExpBottle.createRecipe();
+
         WitherSword.createRecipe();
         LighteningWand.createRecipe();
         carBoat.createRecipe();

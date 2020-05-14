@@ -1,4 +1,4 @@
-package com.lxgshadow.customitem.UltimateWeapon;
+package com.lxgshadow.customitem.normal;
 
 import com.lxgshadow.customitem.Main;
 import org.bukkit.Material;

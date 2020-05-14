@@ -13,7 +13,7 @@ public class Messages {
     public static String suicide_Msg = "AWSL";
     public static String broadcase_Msg = "[System Message]: %(m)";
 
-    public static String forcemsg_Player404 ="找不到该玩家或该玩家已下线";
+    public static String forcemsg_Player404 ="找不到该玩家";
 
     public static String team_404 ="没有找到该队伍";
     public static String team_NotIn = "你不在任何一个队伍里";

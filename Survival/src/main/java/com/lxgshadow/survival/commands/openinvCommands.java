@@ -29,12 +29,17 @@ public class openinvCommands implements CommandExecutor {
         }
         String pn = args[0];
         Player player = this.plugin.getServer().getPlayer(pn);
+        PlayerInventoryChestViewer viewer;
         if (player == null){
+            viewer = PicvManager.createOffline(this.plugin.getServer().getOfflinePlayer(pn));
+
+        }else {
+            viewer = PicvManager.create(player);
+        }
+        if (viewer == null){
             sender.sendMessage(Messages.forcemsg_Player404);
             return true;
         }
-
-        PlayerInventoryChestViewer viewer = PicvManager.create(player);
         ((Player) sender).openInventory(viewer.getInventory());
         return true;
     }
