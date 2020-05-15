@@ -3,6 +3,7 @@ package com.lxgshadow.easyduel.mode;
 import com.lxgshadow.easyduel.Main;
 import com.lxgshadow.easyduel.arena.Arena;
 import com.lxgshadow.easyduel.arena.ArenaManager;
+import com.lxgshadow.easyduel.events.EasyDuelEndEvent;
 import com.lxgshadow.easyduel.events.EasyDuelPlayerDeadEvent;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -59,6 +60,14 @@ public class ArenaModeBase extends ArenaMode {
                 p1.hidePlayer(Main.getInstance(),player);
             }
         }
+    }
 
+    @EventHandler
+    public void onDuelEnd(EasyDuelEndEvent event){
+        // set all player health to max
+        Arena arena = event.getArena();
+        for (Player p1 : arena.getPlayers()) {
+            p1.setHealth(p1.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        }
     }
 }

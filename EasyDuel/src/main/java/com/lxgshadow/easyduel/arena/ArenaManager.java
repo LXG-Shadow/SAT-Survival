@@ -2,6 +2,7 @@ package com.lxgshadow.easyduel.arena;
 
 import com.lxgshadow.easyduel.Main;
 import com.lxgshadow.easyduel.Messages;
+import com.lxgshadow.easyduel.events.EasyDuelArenaCreateEvent;
 import com.lxgshadow.easyduel.events.EasyDuelStartEvent;
 import com.lxgshadow.easyduel.mode.ArenaMode;
 import org.bukkit.entity.Entity;
@@ -42,16 +43,22 @@ public class ArenaManager {
     public static Arena create(Iterable<ArenaTeam> teams, ArenaProperties properties,ArenaMode mode){
         id ++;
         Arena arena = new Arena(id,properties,mode,teams);
+        EasyDuelArenaCreateEvent event = new EasyDuelArenaCreateEvent(arena);
+        Main.getInstance().getServer().getPluginManager().callEvent(event);
+        return arena;
+    }
+
+    public static boolean startArena(Arena arena){
         // arena create and duel start
         EasyDuelStartEvent event = new EasyDuelStartEvent(arena);
         Main.getInstance().getServer().getPluginManager().callEvent(event);
         if (event.isCancelled()){
-            return arena;
+            return false;
         }
-        arenas.put(id,arena);
+        arenas.put(arena.getId(),arena);
         arena.start();
         arena.sendStartInfo();
-        return arena;
+        return true;
     }
 
     public static Arena[] getAllArena(){

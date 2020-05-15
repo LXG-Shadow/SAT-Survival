@@ -21,7 +21,7 @@ import java.util.*;
 public class Arena {
     private int id;
 
-    private int timeInTick;
+    private int time;
     private ArenaMode mode;
     private ArenaProperties properties;
     private HashSet<Player> players;
@@ -36,7 +36,7 @@ public class Arena {
         this.id = id;
         this.properties = arenaProperties;
         this.mode = mode;
-        this.timeInTick = 0;
+        this.time = 0;
         this.players = new HashSet<>();
         this.teams = new HashSet<>((Collection<? extends ArenaTeam>) teams);
         this.alive = new HashMap<>();
@@ -60,6 +60,8 @@ public class Arena {
     public void addErrorMsg(String s) {
         this.errorMsg.add(s);
     }
+
+    public void clearErrorMsg(String s){this.errorMsg.clear();}
 
     public ArrayList<String> getErrormsg() {
         return this.errorMsg;
@@ -98,11 +100,11 @@ public class Arena {
         timer = new BukkitRunnable() {
             @Override
             public void run() {
-                timeInTick += 1;
+                time += 1;
                 Main.getInstance().getServer().getPluginManager().callEvent(new EasyDuelArenaTimeChangeEvent(arena));
             }
         };
-        timer.runTaskTimer(Main.getInstance(), 0, 1);
+        timer.runTaskTimer(Main.getInstance(), 0, 20);
         timer.cancel();
     }
 
@@ -110,8 +112,8 @@ public class Arena {
         timer.cancel();
     }
 
-    public int getTimeInTick() {
-        return this.timeInTick;
+    public int getTime() {
+        return this.time;
     }
 
 
@@ -206,7 +208,7 @@ public class Arena {
         for (Player player : this.players) {
             opps = new StringBuilder();
             player.sendMessage(Messages.arena_splitor);
-            player.sendMessage("对局结束: ");
+            player.sendMessage("决斗结束: ");
             player.sendMessage("模式: " + this.mode.getDisplayname());
             opps.append("胜利者: ");
             for (ArenaTeam at : this.teams) {
@@ -219,6 +221,12 @@ public class Arena {
             opps.delete(opps.length() - 1, opps.length());
             player.sendMessage(opps.toString());
             player.sendMessage(Messages.arena_splitor);
+        }
+    }
+
+    public void broadcast(String msg){
+        for (Player player : this.players) {
+            player.sendMessage(msg);
         }
     }
 
@@ -242,8 +250,6 @@ public class Arena {
         return false;
     }
 
-
-
     public void showBoarder(Player player, int y) {
         int x1, z1, x2, z2;
         x1 = this.properties.margin[0];
@@ -264,6 +270,7 @@ public class Arena {
             }
         }
         for (Location l : pshowing) {
+            //player.sendBlockChange(l,Material.GLASS, (byte) 0);
             player.sendBlockChange(l, Material.GLASS.createBlockData());
         }
     }
@@ -272,6 +279,7 @@ public class Arena {
     public void hideBoarder(Player player) {
         HashSet<Location> pshowing = this.showing.get(player.getUniqueId());
         for (Location l : pshowing) {
+            //player.sendBlockChange(l,player.getWorld().getBlockAt(l).getType(), player.getWorld().getBlockAt(l).getData());
             player.sendBlockChange(l, player.getWorld().getBlockAt(l).getBlockData());
         }
         pshowing.clear();

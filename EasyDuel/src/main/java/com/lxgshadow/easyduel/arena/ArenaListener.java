@@ -2,6 +2,7 @@ package com.lxgshadow.easyduel.arena;
 
 import com.lxgshadow.easyduel.Main;
 import com.lxgshadow.easyduel.Messages;
+import com.lxgshadow.easyduel.events.EasyDuelArenaCreateEvent;
 import com.lxgshadow.easyduel.events.EasyDuelStartEvent;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,7 +28,7 @@ import java.util.UUID;
 public class ArenaListener implements Listener {
     // 如果要重写的话，就把priority调高
     @EventHandler(ignoreCancelled = true)
-    public void onduelstart(EasyDuelStartEvent event){
+    public void onduelstart(EasyDuelArenaCreateEvent event){
         Arena arena = event.getArena();
         // check if player are in other match.
         for (Player p:arena.getPlayers()){

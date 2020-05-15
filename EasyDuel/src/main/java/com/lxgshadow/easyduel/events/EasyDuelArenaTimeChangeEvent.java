@@ -14,11 +14,11 @@ public class EasyDuelArenaTimeChangeEvent extends EasyDuelEvent {
         return arena;
     }
 
-    public int getTimeInTick(){
-        return this.arena.getTimeInTick();
-    }
+//    public int getTimeInTick(){
+//        return this.arena.getTime();
+//    }
 
     public int getTimeInSecs(){
-        return this.arena.getTimeInTick() / 20;
+        return this.arena.getTime();
     }
 }
