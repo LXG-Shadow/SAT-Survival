@@ -1,11 +1,14 @@
 package com.lxgshadow.easyduel.arena;
 
 import com.lxgshadow.easyduel.Main;
+import com.lxgshadow.easyduel.Messages;
+import com.lxgshadow.easyduel.events.EasyDuelStartEvent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -22,94 +25,35 @@ import java.util.UUID;
 
 
 public class ArenaListener implements Listener {
-    public ArenaListener(){
-        new BukkitRunnable(){
-            @Override
-            public void run(){
-                for (Arena arena:ArenaManager.getAllArena()){
-                    for (Player player:arena.getPlayers()){
-                        int[] margin = arena.getMargin();
-                        if (Math.abs(player.getLocation().getBlockX()-margin[0])<3
-                                || Math.abs(player.getLocation().getBlockX()-margin[2])<3
-                                || Math.abs(player.getLocation().getBlockZ()-margin[1])<3
-                                || Math.abs(player.getLocation().getBlockZ()-margin[3])<3){
-                            arena.showBoarder(player,player.getLocation().getBlockY());
-                        }else {
-                            arena.hideBoarder(player);
-                        }
-                    }
-                }
-            }
-        }.runTaskTimer(Main.getInstance(),0,1);
-    }
-
-    @EventHandler
-    public void onMove(PlayerMoveEvent event){
-        Player player = event.getPlayer();
-        int aid = ArenaManager.getArenaId(player);
-        if (aid == -1){
-            return;
-        }
-        Arena arena = ArenaManager.getArena(aid);
-        arena.update(event);
-    }
-
-    @EventHandler
-    public void teleport(PlayerTeleportEvent event){
-        Player player = event.getPlayer();
-        int aid = ArenaManager.getArenaId(player);
-        if (aid == -1){
-            return;
-        }
-        Arena arena = ArenaManager.getArena(aid);
-        arena.update(event);
-    }
-
-    @EventHandler
-    public void onInteract(PlayerInteractEvent event){
-        int aid = ArenaManager.getArenaId(event.getPlayer());
-        if (aid == -1){
-            return;
-        }
-        Arena arena = ArenaManager.getArena(aid);
-        if (!arena.isAlive(event.getPlayer())){
-            event.setCancelled(true);
-        }
-    }
-
-
-    @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event){
-        if (!(event.getEntity() instanceof Player)){return;}
-        Player player = (Player) event.getEntity();
-        int aid = ArenaManager.getArenaId(player);
-        if (aid == -1){
-            return;
-        }
-        Arena arena = ArenaManager.getArena(aid);
-        Entity damager = event.getDamager();
-        if (damager instanceof Player && !arena.isAlive((Player) damager)){
-            event.setCancelled(true);
-            return;
-        }
-        if (damager instanceof Projectile && ((Projectile) damager).getShooter() instanceof Player){
-            if (!arena.isAlive((Player)((Projectile) damager).getShooter())){
+    // 如果要重写的话，就把priority调高
+    @EventHandler(ignoreCancelled = true)
+    public void onduelstart(EasyDuelStartEvent event){
+        Arena arena = event.getArena();
+        // check if player are in other match.
+        for (Player p:arena.getPlayers()){
+            if (ArenaManager.getArenaId(p) != -1){
+                arena.addErrorMsg(Messages.arena_error_PlayerExist.replace("%p",p.getDisplayName()));
                 event.setCancelled(true);
                 return;
             }
         }
-        arena.update(event);
-    }
-
-    @EventHandler
-    public void onDamage2(EntityDamageEvent event){
-        if (!(event.getEntity() instanceof Player)){return;}
-        Player player = (Player) event.getEntity();
-        int aid = ArenaManager.getArenaId(player);
-        if (aid == -1){
+        // check player in the arena size
+        if (arena.getPlayerOutOfBoarder().size()>0){
+            arena.addErrorMsg(Messages.arena_error_PlayerOutOfBoarder);
+            event.setCancelled(true);
             return;
         }
-        Arena arena = ArenaManager.getArena(aid);
-        arena.update(event);
+        // check if two or more team have same player
+        if (ArenaTeam.HaveSamePlayer(arena.getTeams())){
+            arena.addErrorMsg(Messages.arena_error_PlayerInDifferentTeam);
+            event.setCancelled(true);
+            return;
+        }
+        // check if mode exist
+        if (arena.getMode() == null){
+            arena.addErrorMsg(Messages.arena_error_Mode404);
+            event.setCancelled(true);
+            return;
+        }
     }
 }

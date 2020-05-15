@@ -3,6 +3,7 @@ package com.lxgshadow.easyduel;
 import com.lxgshadow.easyduel.arena.ArenaManager;
 import com.lxgshadow.easyduel.commands.EasyDuel;
 import com.lxgshadow.easyduel.commands.duel;
+import com.lxgshadow.easyduel.mode.ArenaModeManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class
@@ -30,6 +31,7 @@ Main extends JavaPlugin {
 
     private void initializeManagers(){
         ArenaManager.initialize();
+        ArenaModeManager.initialize();
     }
 
     private void registerEvents(){

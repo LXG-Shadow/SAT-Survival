@@ -20,4 +20,6 @@ commands:
   forcemsg:
   openinv:
   hat:
+  whereami:
+    aliases: [wai]
 

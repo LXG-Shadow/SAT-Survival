@@ -45,9 +45,13 @@ public class PicvManager {
         }
         GameProfile gprofile = new GameProfile(offplayer.getUniqueId(),offplayer.getName());
         DedicatedServer dServer = ((CraftServer) Bukkit.getServer()).getServer();
-        EntityPlayer entity = new EntityPlayer(dServer,dServer.getWorldServer(DimensionManager.OVERWORLD),gprofile,new PlayerInteractManager(dServer.getWorldServer(DimensionManager.OVERWORLD)));
+        EntityPlayer entity = new EntityPlayer(dServer,dServer.getWorldServer(DimensionManager.OVERWORLD),gprofile,
+                new PlayerInteractManager(dServer.getWorldServer(DimensionManager.OVERWORLD)));
 
         CraftPlayer cPlayer = entity.getBukkitEntity();
+//        cPlayer.loadData();
+//        cPlayer.saveData();
+
         if (cPlayer != null){
             cPlayer.loadData();
             PlayerInventoryChestViewer viewer = new PlayerInventoryChestViewer(cPlayer);
