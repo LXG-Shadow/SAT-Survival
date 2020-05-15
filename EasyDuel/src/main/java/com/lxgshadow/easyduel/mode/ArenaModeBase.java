@@ -19,9 +19,9 @@ public class ArenaModeBase extends ArenaMode {
     }
 
     @EventHandler
-    public void onMove(PlayerMoveEvent event){
+    public void onMove(PlayerMoveEvent event) {
         Arena arena = ArenaManager.getArena(event.getPlayer());
-        if (super.isSameMode(arena)){
+        if (super.isSameMode(arena)) {
             Player player = event.getPlayer();
             assert arena != null;
             if (!arena.isAlive(player)) {
@@ -37,7 +37,7 @@ public class ArenaModeBase extends ArenaMode {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event){
+    public void onInteract(PlayerInteractEvent event) {
         Arena arena = ArenaManager.getArena(event.getPlayer());
         if (this.isSameMode(arena)) {
             assert arena != null;
@@ -48,26 +48,30 @@ public class ArenaModeBase extends ArenaMode {
     }
 
     @EventHandler
-    public void onPlayerDeadInArena(EasyDuelPlayerDeadEvent event){
-        // set dead player health to max
-        Player player = event.getPlayer();
-        event.getPlayer().setHealth(event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+    public void onPlayerDeadInArena(EasyDuelPlayerDeadEvent event) {
         Arena arena = event.getArena();
-        for (Player p1 : arena.getPlayers()) {
-            player.showPlayer(Main.getInstance(),p1);
-            // vanish died player in alive people
-            if (arena.isAlive(p1)) {
-                p1.hidePlayer(Main.getInstance(),player);
+        if (this.isSameMode(arena)) {
+            // set dead player health to max
+            Player player = event.getPlayer();
+            event.getPlayer().setHealth(event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+            for (Player p1 : arena.getPlayers()) {
+                player.showPlayer(Main.getInstance(), p1);
+                // vanish died player in alive people
+                if (arena.isAlive(p1)) {
+                    p1.hidePlayer(Main.getInstance(), player);
+                }
             }
         }
     }
 
     @EventHandler
-    public void onDuelEnd(EasyDuelEndEvent event){
+    public void onDuelEnd(EasyDuelEndEvent event) {
         // set all player health to max
         Arena arena = event.getArena();
-        for (Player p1 : arena.getPlayers()) {
-            p1.setHealth(p1.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        if (this.isSameMode(arena)) {
+            for (Player p1 : arena.getPlayers()) {
+                p1.setHealth(p1.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+            }
         }
     }
 }
