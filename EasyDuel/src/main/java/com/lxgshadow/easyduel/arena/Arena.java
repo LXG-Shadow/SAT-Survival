@@ -270,8 +270,8 @@ public class Arena {
             }
         }
         for (Location l : pshowing) {
-            player.sendBlockChange(l,Material.GLASS, (byte) 0);
-            //player.sendBlockChange(l, Material.GLASS.createBlockData());
+            //player.sendBlockChange(l,Material.GLASS, (byte) 0);
+            player.sendBlockChange(l, Material.GLASS.createBlockData());
         }
     }
 
@@ -279,8 +279,8 @@ public class Arena {
     public void hideBoarder(Player player) {
         HashSet<Location> pshowing = this.showing.get(player.getUniqueId());
         for (Location l : pshowing) {
-            player.sendBlockChange(l,player.getWorld().getBlockAt(l).getType(), player.getWorld().getBlockAt(l).getData());
-            //player.sendBlockChange(l, player.getWorld().getBlockAt(l).getBlockData());
+            //player.sendBlockChange(l,player.getWorld().getBlockAt(l).getType(), player.getWorld().getBlockAt(l).getData());
+            player.sendBlockChange(l, player.getWorld().getBlockAt(l).getBlockData());
         }
         pshowing.clear();
     }
