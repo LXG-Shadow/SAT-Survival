@@ -16,7 +16,6 @@ public class EasyDuelEndEvent extends EasyDuelEvent{
         return arena;
     }
 
-
     public ArenaTeam getWinnerTeam(){
         for (ArenaTeam at:arena.getTeams()){
             if (at.isWin()){
